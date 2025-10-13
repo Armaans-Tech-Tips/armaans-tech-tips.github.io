@@ -1,5 +1,6 @@
 import { useLocation, Link } from "react-router-dom";
 import { useEffect } from "react";
+import { VisitorCounter } from "@/components/VisitorCounter";
 
 const NotFound = () => {
   const location = useLocation();
@@ -17,6 +18,7 @@ const NotFound = () => {
           Return to Home
         </Link>
       </div>
+      <VisitorCounter variant="floating" />
     </div>
   );
 };
