@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Heart, Share2, ArrowLeft } from 'lucide-react';
 import { useUserPrefs } from '@/contexts/UserPrefsContext';
 import { hash, asset, canonical } from '@/lib/paths';
+import { thumb } from '@/lib/thumb';
 import { SEO } from '@/components/SEO';
 import { similarItems } from '@/utils/similarity';
 
@@ -43,7 +44,7 @@ export default function GameDetailPage() {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <img src={game.thumbnail} alt={game.title} className="rounded-lg mb-4 max-h-64 object-cover w-full" />
+            <img src={thumb(game.thumbnail)} alt={game.title} className="rounded-lg mb-4 max-h-64 object-cover w-full" />
             <p className="mb-4">{game.description}</p>
             <div className="flex gap-2">
               <Button onClick={play}>Play</Button>
@@ -56,7 +57,7 @@ export default function GameDetailPage() {
           <CardContent className="grid gap-3">
             {similar.map(s => (
               <button key={s.id} className="text-left hover:bg-white/5 rounded p-2"
-                onClick={() => navigate(hash(`/games/${s.id}`))}>
+                onClick={() => navigate(`/games/${s.id}`)}>
                 <div className="font-medium">{s.title}</div>
                 <div className="text-sm opacity-70">{s.tags?.slice(0,3).join(' • ')}</div>
               </button>

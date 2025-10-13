@@ -4,6 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { LoginModal } from "./LoginModal";
 import { ShareButton } from "./ShareButton";
+import { StreakBadge } from "./StreakBadge";
 import { Button } from "./ui/button";
 
 export const Navbar: React.FC = () => {
@@ -117,6 +118,7 @@ export const Navbar: React.FC = () => {
 
             {/* Auth Button & Actions */}
             <div className="hidden md:flex items-center gap-2">
+              <StreakBadge />
               <Button
                 variant="ghost"
                 size="sm"

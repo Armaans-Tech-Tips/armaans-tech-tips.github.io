@@ -12,6 +12,7 @@ import { SEO } from "@/components/SEO";
 import { Footer } from "@/components/Footer";
 import { hash } from "@/lib/paths";
 import games from "@/data/games.json";
+import { thumb } from "@/lib/thumb";
 
 const Index = () => {
   const { isAuthenticated } = useAuth();
@@ -51,15 +52,23 @@ const Index = () => {
                 {continueItems.slice(0, 12).map(game => (
                   <Link
                     key={game.id}
-                    to={hash(`/games/${game.id}`)}
+                    to={`/games/${game.id}`}
                     className="group bg-gamer-card border border-gamer-border rounded-lg p-3
                              transition-all duration-normal hover:border-gamer-accent hover:shadow-lg hover:shadow-gamer-accent/20 hover:-translate-y-1"
                   >
                     <img
-                      src={game.thumbnail}
+                      src={thumb(game.thumbnail)}
                       alt={game.title}
-                      className="w-full h-20 object-cover rounded mb-2"
+                      className={`w-full h-20 object-cover rounded mb-2 ${prefs.settings.studyMode ? 'blur-sm contrast-50' : ''}`}
                     />
+                    {prefs.settings.studyMode && (
+                      <button
+                        className="text-xs underline opacity-80"
+                        onClick={(e) => { e.preventDefault(); /* temporarily reveal this card */ }}
+                      >
+                        reveal
+                      </button>
+                    )}
                     <h3 className="font-medium text-gamer-text group-hover:text-gamer-accent transition-colors duration-fast text-sm text-center truncate">
                       {game.title}
                     </h3>
@@ -79,15 +88,23 @@ const Index = () => {
                 {favItems.slice(0, 12).map(game => (
                   <Link
                     key={game.id}
-                    to={hash(`/games/${game.id}`)}
+                    to={`/games/${game.id}`}
                     className="group bg-gamer-card border border-gamer-border rounded-lg p-3
                              transition-all duration-normal hover:border-gamer-accent hover:shadow-lg hover:shadow-gamer-accent/20 hover:-translate-y-1"
                   >
                     <img
-                      src={game.thumbnail}
+                      src={thumb(game.thumbnail)}
                       alt={game.title}
-                      className="w-full h-20 object-cover rounded mb-2"
+                      className={`w-full h-20 object-cover rounded mb-2 ${prefs.settings.studyMode ? 'blur-sm contrast-50' : ''}`}
                     />
+                    {prefs.settings.studyMode && (
+                      <button
+                        className="text-xs underline opacity-80"
+                        onClick={(e) => { e.preventDefault(); /* temporarily reveal this card */ }}
+                      >
+                        reveal
+                      </button>
+                    )}
                     <h3 className="font-medium text-gamer-text group-hover:text-gamer-accent transition-colors duration-fast text-sm text-center truncate">
                       {game.title}
                     </h3>

@@ -128,7 +128,7 @@ const CollectionsPage: React.FC<CollectionsPageProps> = () => {
     setIsCreateDialogOpen(false);
 
     // Navigate to the new collection
-    navigate(hash(`/collections/${newCollection.id}`));
+    navigate(`/collections/${newCollection.id}`);
   };
 
   // Update collection
@@ -147,7 +147,7 @@ const CollectionsPage: React.FC<CollectionsPageProps> = () => {
 
     if (currentCollection?.id === collectionId) {
       setCurrentCollection(null);
-      navigate('/Armaan-Tech-Tips/#/collections');
+      navigate('/collections');
     }
   };
 
@@ -217,7 +217,7 @@ const CollectionsPage: React.FC<CollectionsPageProps> = () => {
                 <div className="flex items-center gap-4">
                   <Button
                     variant="ghost"
-                    onClick={() => navigate('/Armaan-Tech-Tips/#/collections')}
+                    onClick={() => navigate('/collections')}
                     className="text-white hover:bg-white/10"
                   >
                     ← Back to Collections
@@ -421,7 +421,7 @@ const CollectionsPage: React.FC<CollectionsPageProps> = () => {
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {collections.map(collection => (
-                  <Card key={collection.id} className="bg-white/10 border-white/20 hover:bg-white/15 transition-colors cursor-pointer" onClick={() => navigate(`/Armaan-Tech-Tips/#/collections/${collection.id}`)}>
+                  <Card key={collection.id} className="bg-white/10 border-white/20 hover:bg-white/15 transition-colors cursor-pointer" onClick={() => navigate(`/collections/${collection.id}`)}>
                     <CardHeader>
                       <CardTitle className="text-white flex items-center justify-between">
                         <span className="truncate">{collection.title}</span>

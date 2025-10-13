@@ -22,48 +22,40 @@ import { Separator } from "@/components/ui/separator";
 import utilitiesData from "@/data/utilities.json";
 import { ShareButton } from "@/components/ShareButton";
 import { SEO } from "@/components/SEO";
+import { canonical } from "@/lib/paths";
 
 interface UtilityDetailPageProps {}
 
 const UtilityDetailPage: React.FC<UtilityDetailPageProps> = () => {
-  const { slug } = useParams<{ slug: string }>();
+  const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const { isFavorite: checkFavorite, addFavorite, removeFavorite, addToHistory } = useUserPrefs();
+  const { prefs, toggleFavorite, pushHistory } = useUserPrefs();
   const [utility, setUtility] = useState<typeof utilitiesData[0] | null>(null);
 
   useEffect(() => {
-    if (!slug) return;
+    if (!id) return;
 
-    // Find the utility by slug
-    const foundUtility = utilitiesData.find(u => u.id === slug);
+    // Find the utility by id
+    const foundUtility = utilitiesData.find(u => u.id === id);
     if (foundUtility) {
       setUtility(foundUtility);
-
       // Record utility view in history
-      addToHistory({
-        id: slug,
-        title: foundUtility.title,
-        type: 'utility',
-        useCount: 1
-      });
+      pushHistory(foundUtility.id, 'utility');
     }
-  }, [slug, addToHistory]);
+  }, [id, pushHistory]);
 
-  const isFavorite = utility ? checkFavorite(utility.id) : false;
+  const isFavorite = utility ? prefs.favorites.includes(utility.id) : false;
 
-  const toggleFavorite = () => {
+  const toggleFav = () => {
     if (!utility) return;
-
-    if (isFavorite) {
-      removeFavorite(utility.id);
-    } else {
-      addFavorite(utility.id);
-    }
+    toggleFavorite(utility.id);
   };
 
   const handleUse = () => {
     if (!utility) return;
-    navigate(utility.url);
+    // Local tools use in-app routes (/#/utilities/...); external tools open new tab
+    if (utility.url.startsWith("/")) navigate(utility.url.replace('/#', ''));
+    else window.open(utility.url, "_blank", "noopener,noreferrer");
   };
 
   if (!utility) {
@@ -87,7 +79,11 @@ const UtilityDetailPage: React.FC<UtilityDetailPageProps> = () => {
     );
   }
 
-  const utilityUrl = `https://subset28.github.io/Armaan-Tech-Tips/#/utilities/${utility.id}`;
+  const share = async () => {
+    const url = canonical(`/utilities/${utility.id}`);
+    if (navigator.share) await navigator.share({ title: utility.title, url });
+    else { await navigator.clipboard.writeText(url); alert("Link copied"); }
+  };
 
   const getInputIcon = (inputType: string) => {
     switch (inputType) {
@@ -110,10 +106,9 @@ const UtilityDetailPage: React.FC<UtilityDetailPageProps> = () => {
   return (
     <>
       <SEO
-        title={utility.title}
+        title={`${utility.title} — Armaan's Tech Tips`}
         description={utility.description}
-        ogImage={utility.thumbnail}
-        canonical={utilityUrl}
+        canonical={canonical(`/utilities/${utility.id}`)}
       />
 
       <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900">
@@ -149,12 +144,14 @@ const UtilityDetailPage: React.FC<UtilityDetailPageProps> = () => {
                   <Button
                     variant="outline"
                     size="sm"
-                    onClick={toggleFavorite}
+                    onClick={toggleFav}
                     className={`bg-white/10 border-white/20 ${isFavorite ? 'text-red-400' : 'text-white'} hover:bg-white/20`}
                   >
                     <Heart className={`h-4 w-4 ${isFavorite ? 'fill-current' : ''}`} />
                   </Button>
-                  <ShareButton variant="outline" size="sm" />
+                  <Button variant="outline" size="sm" onClick={share} className="bg-white/10 border-white/20 text-white hover:bg-white/20">
+                    <Share2 className="h-4 w-4" />
+                  </Button>
                   <Button
                     onClick={handleUse}
                     size="lg"
@@ -264,11 +261,11 @@ const UtilityDetailPage: React.FC<UtilityDetailPageProps> = () => {
                       <Zap className="h-4 w-4 mr-2" />
                       Use Utility
                     </Button>
-                    <Button variant="outline" onClick={() => window.open(utilityUrl, '_blank')} className="w-full bg-white/10 border-white/20 text-white hover:bg-white/20">
+                    <Button variant="outline" onClick={() => window.open(canonical(`/utilities/${utility.id}`), '_blank')} className="w-full bg-white/10 border-white/20 text-white hover:bg-white/20">
                       <ExternalLink className="h-4 w-4 mr-2" />
                       Open in New Tab
                     </Button>
-                    <Button variant="outline" onClick={toggleFavorite} className="w-full">
+                    <Button variant="outline" onClick={toggleFav} className="w-full">
                       <Heart className={`h-4 w-4 mr-2 ${isFavorite ? 'fill-current text-red-400' : ''}`} />
                       {isFavorite ? 'Remove from' : 'Add to'} Favorites
                     </Button>

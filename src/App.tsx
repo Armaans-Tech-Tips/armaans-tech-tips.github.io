@@ -54,12 +54,9 @@ const AppContent = () => {
       <CoachMarks />
       <div className="relative min-h-screen">
         <Routes>
-          <Route path="/" element={<Index />} />
           <Route path="/games" element={<GamesPage />} />
-          <Route path="/games/:slug" element={<GameDetailPage />} />
-          <Route path="/utilities" element={<UtilitiesPage />} />
-          <Route path="/utilities/:slug" element={<UtilityDetailPage />} />
-          <Route path="/optimizations" element={<OptimizationsPage />} />
+          <Route path="/games/:id" element={<GameDetailPage />} />
+          <Route path="/utilities/:id" element={<UtilityDetailPage />} />
           <Route path="/education" element={<EducationPage />} />
           <Route path="/links" element={<LinksPage />} />
           <Route path="/updates" element={<UpdatesPage />} />
