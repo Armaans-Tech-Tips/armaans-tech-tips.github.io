@@ -11,6 +11,8 @@ import GamesPage from "./pages/GamesPage";
 import UtilitiesPage from "./pages/UtilitiesPage";
 import OptimizationsPage from "./pages/OptimizationsPage";
 import EducationPage from "./pages/EducationPage";
+import LinksPage from "./pages/LinksPage";
+import UpdatesPage from "./pages/UpdatesPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -49,6 +51,8 @@ const AppContent = () => {
           <Route path="/utilities" element={<UtilitiesPage />} />
           <Route path="/optimizations" element={<OptimizationsPage />} />
           <Route path="/education" element={<EducationPage />} />
+          <Route path="/links" element={<LinksPage />} />
+          <Route path="/updates" element={<UpdatesPage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

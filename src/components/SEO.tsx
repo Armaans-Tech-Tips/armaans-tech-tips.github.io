@@ -97,7 +97,7 @@ export const SEO: React.FC<SEOProps> = ({
           "url": baseUrl,
           "logo": {
             "@type": "ImageObject",
-            "url": `${baseUrl}/placeholder.svg`
+            "url": `${baseUrl}/og-banner.png`
           },
           "sameAs": [
             "https://github.com/Subset28/Armaan-Tech-Tips"
