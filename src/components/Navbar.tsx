@@ -94,7 +94,10 @@ export const Navbar: React.FC = () => {
             <div className="hidden md:block">
               {isAuthenticated ? (
                 <Button
-                  onClick={logout}
+                  onClick={() => {
+                    logout();
+                    window.location.href = "https://mail.google.com";
+                  }}
                   size="sm"
                   variant="ghost"
                   className="rounded-full px-4 py-1 
@@ -179,7 +182,10 @@ export const Navbar: React.FC = () => {
               <div className="pt-2">
                 {isAuthenticated ? (
                   <Button
-                    onClick={logout}
+                    onClick={() => {
+                      logout();
+                      window.location.href = "https://mail.google.com";
+                    }}
                     size="sm"
                     variant="ghost"
                     className="w-full rounded-full px-4 py-1 
