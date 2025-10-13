@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Gamepad2, Wrench, Cpu, GraduationCap, Home, Search } from "lucide-react";
+import { Gamepad2, Wrench, Cpu, GraduationCap, Home, Search, Command } from "lucide-react";
 import {
   CommandDialog,
   CommandEmpty,
@@ -8,8 +8,10 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
+  CommandSeparator,
 } from "@/components/ui/command";
 import { useAuth } from "@/contexts/AuthContext";
+import { FastSearch } from "./FastSearch";
 
 interface CommandItem {
   id: string;
@@ -22,6 +24,7 @@ interface CommandItem {
 
 export const CommandPalette: React.FC = () => {
   const [open, setOpen] = useState(false);
+  const [showSearch, setShowSearch] = useState(false);
   const navigate = useNavigate();
   const { isAuthenticated } = useAuth();
 
@@ -30,6 +33,7 @@ export const CommandPalette: React.FC = () => {
       if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
         e.preventDefault();
         setOpen((open) => !open);
+        setShowSearch(true);
       }
     };
 
@@ -46,6 +50,7 @@ export const CommandPalette: React.FC = () => {
       action: () => {
         navigate("/");
         setOpen(false);
+        setShowSearch(false);
       },
     },
     {
@@ -56,6 +61,7 @@ export const CommandPalette: React.FC = () => {
       action: () => {
         navigate("/games");
         setOpen(false);
+        setShowSearch(false);
       },
       requiresAuth: true,
     },
@@ -67,6 +73,7 @@ export const CommandPalette: React.FC = () => {
       action: () => {
         navigate("/utilities");
         setOpen(false);
+        setShowSearch(false);
       },
     },
     {
@@ -77,6 +84,7 @@ export const CommandPalette: React.FC = () => {
       action: () => {
         navigate("/optimizations");
         setOpen(false);
+        setShowSearch(false);
       },
     },
     {
@@ -87,6 +95,7 @@ export const CommandPalette: React.FC = () => {
       action: () => {
         navigate("/education");
         setOpen(false);
+        setShowSearch(false);
       },
     },
   ];
@@ -95,27 +104,64 @@ export const CommandPalette: React.FC = () => {
     (cmd) => !cmd.requiresAuth || isAuthenticated
   );
 
+  const handleClose = () => {
+    setOpen(false);
+    setShowSearch(false);
+  };
+
   return (
-    <CommandDialog open={open} onOpenChange={setOpen}>
-      <CommandInput placeholder="Type a command or search..." />
-      <CommandList>
-        <CommandEmpty>No results found.</CommandEmpty>
-        <CommandGroup heading="Navigation">
-          {filteredCommands.map((cmd) => (
-            <CommandItem key={cmd.id} onSelect={cmd.action}>
-              <cmd.icon className="mr-2 h-4 w-4" />
-              <div className="flex flex-col">
-                <span>{cmd.title}</span>
-                {cmd.description && (
-                  <span className="text-xs text-muted-foreground">
-                    {cmd.description}
-                  </span>
-                )}
+    <>
+      <CommandDialog open={open} onOpenChange={handleClose}>
+        <CommandInput
+          placeholder="Type to search or navigate..."
+          onFocus={() => setShowSearch(true)}
+        />
+        <CommandList>
+          <CommandEmpty>No results found.</CommandEmpty>
+
+          {showSearch ? (
+            <CommandGroup heading="Search Results">
+              <div className="px-2 py-1 text-sm text-muted-foreground">
+                Search across games, utilities, and guides...
               </div>
-            </CommandItem>
-          ))}
-        </CommandGroup>
-      </CommandList>
-    </CommandDialog>
+            </CommandGroup>
+          ) : (
+            <>
+              <CommandGroup heading="Quick Navigation">
+                {filteredCommands.map((cmd) => (
+                  <CommandItem key={cmd.id} onSelect={cmd.action}>
+                    <cmd.icon className="mr-2 h-4 w-4" />
+                    <div className="flex flex-col">
+                      <span>{cmd.title}</span>
+                      {cmd.description && (
+                        <span className="text-xs text-muted-foreground">
+                          {cmd.description}
+                        </span>
+                      )}
+                    </div>
+                  </CommandItem>
+                ))}
+              </CommandGroup>
+
+              <CommandSeparator />
+
+              <CommandGroup heading="Search">
+                <CommandItem onSelect={() => setShowSearch(true)}>
+                  <Search className="mr-2 h-4 w-4" />
+                  <div className="flex flex-col">
+                    <span>Search Everything</span>
+                    <span className="text-xs text-muted-foreground">
+                      Find games, utilities, guides, and more
+                    </span>
+                  </div>
+                </CommandItem>
+              </CommandGroup>
+            </>
+          )}
+        </CommandList>
+      </CommandDialog>
+
+      <FastSearch isOpen={showSearch} onClose={() => setShowSearch(false)} />
+    </>
   );
 };

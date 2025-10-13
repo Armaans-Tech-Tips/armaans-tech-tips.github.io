@@ -1,5 +1,15 @@
 import React, { useEffect } from "react";
 import { Toaster } from "@/components/ui/toaster";
+import Index from "./pages/Index";
+import GamesPage from "./pages/GamesPage";
+import GameDetailPage from "./pages/GameDetailPage";
+import UtilitiesPage from "./pages/UtilitiesPage";
+import UtilityDetailPage from "./pages/UtilityDetailPage";
+import OptimizationsPage from "./pages/OptimizationsPage";
+import EducationPage from "./pages/EducationPage";
+import LinksPage from "./pages/LinksPage";
+import UpdatesPage from "./pages/UpdatesPage";
+import NotFound from "./pages/NotFound";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -7,14 +17,6 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import { PWAInstallPrompt } from "@/components/PWAInstallPrompt";
 import { AuthProvider, useAuth } from "@/contexts/AuthContext";
 import { CommandPalette } from "@/components/CommandPalette";
-import Index from "./pages/Index";
-import GamesPage from "./pages/GamesPage";
-import UtilitiesPage from "./pages/UtilitiesPage";
-import OptimizationsPage from "./pages/OptimizationsPage";
-import EducationPage from "./pages/EducationPage";
-import LinksPage from "./pages/LinksPage";
-import UpdatesPage from "./pages/UpdatesPage";
-import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
@@ -50,7 +52,9 @@ const AppContent = () => {
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/games" element={<GamesPage />} />
+          <Route path="/games/:slug" element={<GameDetailPage />} />
           <Route path="/utilities" element={<UtilitiesPage />} />
+          <Route path="/utilities/:slug" element={<UtilityDetailPage />} />
           <Route path="/optimizations" element={<OptimizationsPage />} />
           <Route path="/education" element={<EducationPage />} />
           <Route path="/links" element={<LinksPage />} />
