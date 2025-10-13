@@ -127,7 +127,7 @@ const CollectionsPage: React.FC<CollectionsPageProps> = () => {
     setIsCreateDialogOpen(false);
 
     // Navigate to the new collection
-    navigate(`/collections/${newCollection.id}`);
+    navigate(`/Armaan-Tech-Tips/#/collections/${newCollection.id}`);
   };
 
   // Update collection
@@ -146,7 +146,7 @@ const CollectionsPage: React.FC<CollectionsPageProps> = () => {
 
     if (currentCollection?.id === collectionId) {
       setCurrentCollection(null);
-      navigate('/collections');
+      navigate('/Armaan-Tech-Tips/#/collections');
     }
   };
 
@@ -216,7 +216,7 @@ const CollectionsPage: React.FC<CollectionsPageProps> = () => {
                 <div className="flex items-center gap-4">
                   <Button
                     variant="ghost"
-                    onClick={() => navigate('/collections')}
+                    onClick={() => navigate('/Armaan-Tech-Tips/#/collections')}
                     className="text-white hover:bg-white/10"
                   >
                     ← Back to Collections
@@ -234,7 +234,7 @@ const CollectionsPage: React.FC<CollectionsPageProps> = () => {
                     <Share2 className="h-4 w-4 mr-2" />
                     Share
                   </Button>
-                  <Button variant="outline" className="bg-red-500/20 border-red-400/50 text-red-300 hover:bg-red-500/30">
+                  <Button variant="outline" onClick={() => deleteCollection(currentCollection.id)} className="bg-red-500/20 border-red-400/50 text-red-300 hover:bg-red-500/30">
                     <Trash2 className="h-4 w-4 mr-2" />
                     Delete
                   </Button>
@@ -420,7 +420,7 @@ const CollectionsPage: React.FC<CollectionsPageProps> = () => {
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {collections.map(collection => (
-                  <Card key={collection.id} className="bg-white/10 border-white/20 hover:bg-white/15 transition-colors cursor-pointer" onClick={() => navigate(`/collections/${collection.id}`)}>
+                  <Card key={collection.id} className="bg-white/10 border-white/20 hover:bg-white/15 transition-colors cursor-pointer" onClick={() => navigate(`/Armaan-Tech-Tips/#/collections/${collection.id}`)}>
                     <CardHeader>
                       <CardTitle className="text-white flex items-center justify-between">
                         <span className="truncate">{collection.title}</span>
