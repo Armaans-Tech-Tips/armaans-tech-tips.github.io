@@ -149,6 +149,8 @@ VITE_ANALYTICS_ID=       # For analytics (if configured)
 VITE_NEWSLETTER_API=     # For newsletter signup (if configured)
 ```
 
+**Note for Developers**: On GitHub Pages, the base path is `/Armaan-Tech-Tips/`. Use `import.meta.env.BASE_URL` for any runtime-constructed URLs to ensure compatibility across development and production environments.
+
 ## 🎮 Feature Deep Dive
 
 ### Gamer Mode 🕹️
