@@ -51,6 +51,9 @@ export const SEO: React.FC<SEOProps> = ({
     updateMetaTag('og:type', 'website', true);
     updateMetaTag('og:url', fullUrl, true);
     updateMetaTag('og:image', `${baseUrl}${ogImage}`, true);
+    updateMetaTag('og:image:width', '1200', true);
+    updateMetaTag('og:image:height', '630', true);
+    updateMetaTag('og:image:alt', title, true);
     updateMetaTag('og:site_name', "Armaan's Tech Tips", true);
 
     // Twitter Card tags
@@ -58,6 +61,7 @@ export const SEO: React.FC<SEOProps> = ({
     updateMetaTag('twitter:title', title);
     updateMetaTag('twitter:description', description);
     updateMetaTag('twitter:image', `${baseUrl}${ogImage}`);
+    updateMetaTag('twitter:image:alt', title);
 
     // Canonical link
     let canonicalLink = document.querySelector('link[rel="canonical"]');

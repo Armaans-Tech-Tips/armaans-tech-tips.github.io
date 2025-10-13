@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useLayoutEffect } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -28,24 +28,16 @@ const AppContent = () => {
   const location = useLocation();
 
   useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        // If authenticated and on homepage, go to Gmail
-        if (isAuthenticated && location.pathname === "/") {
-          window.location.href = "https://mail.google.com";
-        } else {
-          // Otherwise go to Schoology
-          window.location.href = "https://learn.lcps.org/home#/?_k=ozown1";
-        }
-      }
-    };
-
-    document.addEventListener("keydown", handleKeyDown);
-
-    return () => {
-      document.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [isAuthenticated, location.pathname]);
+    if (!('serviceWorker' in navigator)) return;
+    let refreshing = false;
+    navigator.serviceWorker.addEventListener('controllerchange', () => {
+      if (refreshing) return;
+      refreshing = true;
+      // TODO: replace with your toast
+      console.log('App updated. Refreshing…');
+      window.location.reload();
+    });
+  }, []);
 
   return (
     <>
