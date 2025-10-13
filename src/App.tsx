@@ -4,6 +4,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Routes, Route, useLocation } from "react-router-dom";
+import { PWAInstallPrompt } from "@/components/PWAInstallPrompt";
 import { AuthProvider, useAuth } from "@/contexts/AuthContext";
 import { CommandPalette } from "@/components/CommandPalette";
 import Index from "./pages/Index";
@@ -44,6 +45,7 @@ const AppContent = () => {
   return (
     <>
       <CommandPalette />
+      <PWAInstallPrompt />
       <div className="relative min-h-screen">
         <Routes>
           <Route path="/" element={<Index />} />
