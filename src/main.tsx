@@ -7,6 +7,8 @@ import { UserPrefsProvider } from "./contexts/UserPrefsContext";
 import "./index.css";
 
 // Register service worker for PWA
+// Temporarily disabled for cache busting - will re-enable after deployment
+/*
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     const swUrl = `${import.meta.env.BASE_URL}sw.js`;
@@ -19,6 +21,7 @@ if ('serviceWorker' in navigator) {
       });
   });
 }
+*/
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>

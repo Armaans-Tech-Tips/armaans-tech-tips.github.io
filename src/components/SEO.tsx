@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import { canonical } from '@/lib/paths';
 
 interface SEOProps {
   title?: string;
@@ -14,11 +15,13 @@ export const SEO: React.FC<SEOProps> = ({
   description = "Your ultimate tech hub featuring unblocked games, free utilities, PC optimization guides, and educational resources. Password generator, QR codes, color picker, and more tools for students.",
   keywords = "tech tips, unblocked games, pc optimization, utilities, password generator, qr code generator, color picker, text converter, gaming hub, student tools, free utilities, windows optimization, tech guides, educational resources, computer tips, gaming tips",
   ogImage = "/placeholder.svg",
-  canonical
+  canonical: canonicalOverride
 }) => {
   const location = useLocation();
   const baseUrl = window.location.origin;
-  const fullUrl = canonical || `${baseUrl}${location.pathname}`;
+
+  // Use provided canonical or generate hash-based URL for HashRouter
+  const canonicalUrl = canonicalOverride || canonical(`${location.pathname}${location.search}`);
 
   useEffect(() => {
     // Update title
@@ -28,13 +31,13 @@ export const SEO: React.FC<SEOProps> = ({
     const updateMetaTag = (name: string, content: string, isProperty = false) => {
       const attribute = isProperty ? 'property' : 'name';
       let element = document.querySelector(`meta[${attribute}="${name}"]`) as HTMLMetaElement | null;
-      
+
       if (!element) {
         element = document.createElement('meta');
         element.setAttribute(attribute, name);
         document.head.appendChild(element);
       }
-      
+
       element.setAttribute('content', content);
     };
 
@@ -49,7 +52,7 @@ export const SEO: React.FC<SEOProps> = ({
     updateMetaTag('og:title', title, true);
     updateMetaTag('og:description', description, true);
     updateMetaTag('og:type', 'website', true);
-    updateMetaTag('og:url', fullUrl, true);
+    updateMetaTag('og:url', canonicalUrl, true);
     updateMetaTag('og:image', `${baseUrl}${ogImage}`, true);
     updateMetaTag('og:image:width', '1200', true);
     updateMetaTag('og:image:height', '630', true);
@@ -70,7 +73,7 @@ export const SEO: React.FC<SEOProps> = ({
       canonicalLink.setAttribute('rel', 'canonical');
       document.head.appendChild(canonicalLink);
     }
-    canonicalLink.setAttribute('href', fullUrl);
+    canonicalLink.setAttribute('href', canonicalUrl);
 
     // Add structured data for website
     const structuredData = {
@@ -109,20 +112,20 @@ export const SEO: React.FC<SEOProps> = ({
         },
         {
           "@type": "WebPage",
-          "@id": fullUrl,
-          "url": fullUrl,
+          "@id": canonicalUrl,
+          "url": canonicalUrl,
           "name": title,
           "isPartOf": {
             "@id": `${baseUrl}/#website`
           },
           "description": description,
           "breadcrumb": {
-            "@id": `${fullUrl}#breadcrumb`
+            "@id": `${canonicalUrl}#breadcrumb`
           }
         },
         {
           "@type": "BreadcrumbList",
-          "@id": `${fullUrl}#breadcrumb`,
+          "@id": `${canonicalUrl}#breadcrumb`,
           "itemListElement": [
             {
               "@type": "ListItem",
@@ -143,7 +146,7 @@ export const SEO: React.FC<SEOProps> = ({
     }
     scriptTag.textContent = JSON.stringify(structuredData);
 
-  }, [title, description, keywords, ogImage, fullUrl, baseUrl]);
+  }, [title, description, keywords, ogImage, canonicalUrl, baseUrl]);
 
   return null;
 };

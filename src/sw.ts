@@ -4,6 +4,9 @@ import { registerRoute, NavigationRoute } from 'workbox-routing';
 import { StaleWhileRevalidate } from 'workbox-strategies';
 import { ExpirationPlugin } from 'workbox-expiration';
 
+// Cache version for busting old caches
+const CACHE_VERSION = 'v7';
+
 // self.__WB_MANIFEST is injected by vite-plugin-pwa
 // @ts-ignore
 precacheAndRoute(self.__WB_MANIFEST);
@@ -18,7 +21,7 @@ registerRoute(navigationRoute);
 registerRoute(
   /\.(?:css|js|png|jpg|jpeg|svg|gif|webp|woff2?)$/,
   new StaleWhileRevalidate({
-    cacheName: 'static-assets',
+    cacheName: `static-assets-${CACHE_VERSION}`,
     plugins: [new ExpirationPlugin({ maxEntries: 200, maxAgeSeconds: 60 * 60 * 24 * 30 })],
   })
 );
