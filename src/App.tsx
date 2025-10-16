@@ -73,6 +73,8 @@ const AppContent = () => {
       <CoachMarks />
       <div className="relative min-h-screen">
         <Routes>
+          {/* Make home unambiguous */}
+          <Route index element={<Index />} />
           <Route path="/" element={<Index />} />
           <Route path="/games" element={<GamesPage />} />
           <Route path="/games/:id" element={<GameDetailPage />} />
