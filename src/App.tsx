@@ -29,10 +29,6 @@ const AppContent = () => {
   const location = useLocation();
 
   useEffect(() => {
-    logout(); // Log out the user on every route change
-  }, [location.pathname, logout]);
-
-  useEffect(() => {
     if (!('serviceWorker' in navigator)) return;
     let refreshing = false;
     navigator.serviceWorker.addEventListener('controllerchange', () => {
