@@ -1,6 +1,7 @@
 import React from "react";
 import { Wrench, Cpu, GraduationCap, MoreHorizontal, Gamepad2 } from "lucide-react";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 import { useAuth } from "@/contexts/AuthContext";
 import { useUserPrefs } from "@/contexts/UserPrefsContext";
 import { Navbar } from "@/components/Navbar";
@@ -12,6 +13,7 @@ import { SEO } from "@/components/SEO";
 import { Footer } from "@/components/Footer";
 import { FallingLeaves } from "@/components/FallingLeaves";
 import { ThanksgivingCountdown } from "@/components/ThanksgivingCountdown";
+import { DailyReward } from "@/components/DailyReward";
 import { hash } from "@/lib/paths";
 import games from "@/data/games.json";
 import { thumb } from "@/lib/thumb";
@@ -40,6 +42,7 @@ const Index = () => {
       {isAuthenticated ? (
         <>
           <FallingLeaves />
+          <DailyReward streakCount={prefs.settings.streakCount || 0} />
           {/* Gamer Mode Home */}
           <HeroBanner />
 
@@ -52,38 +55,49 @@ const Index = () => {
 
           {/* Continue Playing Rail */}
           {continueItems.length > 0 && (
-            <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <motion.section 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8"
+            >
               <h2 className="text-2xl md:text-3xl font-rowdies font-bold text-gamer-text mb-6 flex items-center gap-2">
                 🎮 Continue Playing
               </h2>
               <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
-                {continueItems.slice(0, 12).map(game => (
-                  <Link
+                {continueItems.slice(0, 12).map((game, idx) => (
+                  <motion.div
                     key={game.id}
-                    to={`/games/${game.id}`}
-                    className="group bg-gamer-card border border-gamer-border rounded-lg p-3
-                             transition-all duration-normal hover:border-gamer-accent hover:shadow-lg hover:shadow-gamer-accent/20 hover:-translate-y-1"
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: idx * 0.05 }}
                   >
-                    <img
-                      src={thumb(game.thumbnail)}
-                      alt={game.title}
-                      className={`w-full h-20 object-cover rounded mb-2 ${prefs.settings.studyMode ? 'blur-sm contrast-50' : ''}`}
-                    />
-                    {prefs.settings.studyMode && (
-                      <button
-                        className="text-xs underline opacity-80"
-                        onClick={(e) => { e.preventDefault(); /* temporarily reveal this card */ }}
-                      >
-                        reveal
-                      </button>
-                    )}
-                    <h3 className="font-medium text-gamer-text group-hover:text-gamer-accent transition-colors duration-fast text-sm text-center truncate">
-                      {game.title}
-                    </h3>
-                  </Link>
+                    <Link
+                      to={`/games/${game.id}`}
+                      className="group bg-gamer-card border border-gamer-border rounded-lg p-3
+                               transition-all duration-normal hover:border-gamer-accent hover:shadow-lg hover:shadow-gamer-accent/20 hover:-translate-y-1"
+                    >
+                      <img
+                        src={thumb(game.thumbnail)}
+                        alt={game.title}
+                        className={`w-full h-20 object-cover rounded mb-2 ${prefs.settings.studyMode ? 'blur-sm contrast-50' : ''}`}
+                      />
+                      {prefs.settings.studyMode && (
+                        <button
+                          className="text-xs underline opacity-80"
+                          onClick={(e) => { e.preventDefault(); /* temporarily reveal this card */ }}
+                        >
+                          reveal
+                        </button>
+                      )}
+                      <h3 className="font-medium text-gamer-text group-hover:text-gamer-accent transition-colors duration-fast text-sm text-center truncate">
+                        {game.title}
+                      </h3>
+                    </Link>
+                  </motion.div>
                 ))}
               </div>
-            </section>
+            </motion.section>
           )}
 
           {/* Favorites Rail */}
@@ -123,69 +137,48 @@ const Index = () => {
           )}
 
           {/* Quick Access Cards for Gamer Mode */}
-          <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+          <motion.section 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4 }}
+            className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16"
+          >
             <h2 className="text-3xl md:text-4xl font-rowdies font-bold text-gamer-text text-center mb-12 flex items-center justify-center gap-3">
               <span>🍂</span> Quick Access <span>🦃</span>
             </h2>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              <Link
-                to="/games"
-                className="group bg-gamer-card border border-gamer-border rounded-lg p-6
-                         transition-all duration-normal hover:border-gamer-accent hover:shadow-lg hover:shadow-gamer-accent/20 hover:-translate-y-1"
-              >
-                <Gamepad2 className="text-gamer-accent mx-auto mb-4" size={48} />
-                <h3 className="font-semibold text-gamer-text group-hover:text-gamer-accent transition-colors duration-fast text-center">
-                  Games Hub
-                </h3>
-                <p className="text-sm text-gamer-muted text-center mt-2">
-                  Browse and play games
-                </p>
-              </Link>
-
-              <Link
-                to="/utilities"
-                className="group bg-gamer-card border border-gamer-border rounded-lg p-6
-                         transition-all duration-normal hover:border-gamer-accent hover:shadow-lg hover:shadow-gamer-accent/20 hover:-translate-y-1"
-              >
-                <Wrench className="text-gamer-accent mx-auto mb-4" size={48} />
-                <h3 className="font-semibold text-gamer-text group-hover:text-gamer-accent transition-colors duration-fast text-center">
-                  Utilities
-                </h3>
-                <p className="text-sm text-gamer-muted text-center mt-2">
-                  Essential tools and utilities
-                </p>
-              </Link>
-
-              <Link
-                to="/optimizations"
-                className="group bg-gamer-card border border-gamer-border rounded-lg p-6
-                         transition-all duration-normal hover:border-gamer-accent hover:shadow-lg hover:shadow-gamer-accent/20 hover:-translate-y-1"
-              >
-                <Cpu className="text-gamer-accent mx-auto mb-4" size={48} />
-                <h3 className="font-semibold text-gamer-text group-hover:text-gamer-accent transition-colors duration-fast text-center">
-                  PC Optimizations
-                </h3>
-                <p className="text-sm text-gamer-muted text-center mt-2">
-                  Tips and tricks for your PC
-                </p>
-              </Link>
-
-              <Link
-                to="/education"
-                className="group bg-gamer-card border border-gamer-border rounded-lg p-6
-                         transition-all duration-normal hover:border-gamer-accent hover:shadow-lg hover:shadow-gamer-accent/20 hover:-translate-y-1"
-              >
-                <GraduationCap className="text-gamer-accent mx-auto mb-4" size={48} />
-                <h3 className="font-semibold text-gamer-text group-hover:text-gamer-accent transition-colors duration-fast text-center">
-                  Education
-                </h3>
-                <p className="text-sm text-gamer-muted text-center mt-2">
-                  Learning resources and content
-                </p>
-              </Link>
+              {[
+                { to: "/games", icon: Gamepad2, title: "Games Hub", desc: "Browse and play games", delay: 0 },
+                { to: "/utilities", icon: Wrench, title: "Utilities", desc: "Essential tools and utilities", delay: 0.1 },
+                { to: "/optimizations", icon: Cpu, title: "PC Optimizations", desc: "Tips and tricks for your PC", delay: 0.2 },
+                { to: "/education", icon: GraduationCap, title: "Education", desc: "Learning resources and content", delay: 0.3 }
+              ].map((item, idx) => (
+                <motion.div
+                  key={item.to}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.5 + item.delay }}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Link
+                    to={item.to}
+                    className="group bg-gamer-card border border-gamer-border rounded-lg p-6
+                             transition-all duration-normal hover:border-gamer-accent hover:shadow-lg hover:shadow-gamer-accent/20 block"
+                  >
+                    <item.icon className="text-gamer-accent mx-auto mb-4 group-hover:scale-110 transition-transform" size={48} />
+                    <h3 className="font-semibold text-gamer-text group-hover:text-gamer-accent transition-colors duration-fast text-center">
+                      {item.title}
+                    </h3>
+                    <p className="text-sm text-gamer-muted text-center mt-2">
+                      {item.desc}
+                    </p>
+                  </Link>
+                </motion.div>
+              ))}
             </div>
-          </section>
+          </motion.section>
         </>
       ) : (
         <>

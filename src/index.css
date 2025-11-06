@@ -90,7 +90,11 @@ All colors MUST be HSL.
 
 @layer utilities {
   .animate-fall {
-    animation: fall linear infinite;
+      animation: fall linear infinite;
+  }
+  
+  .animate-pulse-subtle {
+    animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   }
 }
 

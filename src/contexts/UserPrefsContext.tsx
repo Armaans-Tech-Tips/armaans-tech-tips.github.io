@@ -14,7 +14,8 @@ const defaultPrefs: UserPrefs = {
     soundEnabled: true,
     onboardingCompleted: false,
     streakCount: 0,
-    lastVisitDate: undefined
+    lastVisitDate: undefined,
+    achievements: []
   },
   collections: []
 };
@@ -49,14 +50,35 @@ const safeParse = (raw: string | null): UserPrefs => {
 export const UserPrefsProvider: React.FC<{children: React.ReactNode}> = ({ children }) => {
   const [prefs, setPrefs] = useState<UserPrefs>(() => safeParse(localStorage.getItem(KEY)));
 
-  // streaks
+  // streaks and achievements
   useEffect(() => {
     const today = new Date().toDateString();
     const last = prefs.settings.lastVisitDate;
     if (last === today) return;
+    
     const yesterday = new Date(Date.now() - 86400000).toDateString();
     const streakCount = last === yesterday ? (prefs.settings.streakCount ?? 0) + 1 : 1;
+    
     setPrefs(p => ({ ...p, settings: { ...p.settings, lastVisitDate: today, streakCount }}));
+    
+    // Check for achievements on next render
+    setTimeout(() => {
+      const { checkAchievements, showAchievement } = require('@/components/AchievementToast');
+      const uniqueGames = new Set(prefs.history.filter(h => h.itemType === 'game').map(h => h.itemId)).size;
+      const achievements = prefs.settings.achievements || [];
+      const newAchievements = checkAchievements(streakCount, uniqueGames, achievements);
+      
+      newAchievements.forEach((achievement: any) => {
+        showAchievement(achievement);
+        setPrefs(p => ({
+          ...p,
+          settings: {
+            ...p.settings,
+            achievements: [...(p.settings.achievements || []), achievement.id]
+          }
+        }));
+      });
+    }, 1000);
   }, []);
 
   useEffect(() => {

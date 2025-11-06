@@ -11,9 +11,9 @@ interface SEOProps {
 }
 
 export const SEO: React.FC<SEOProps> = ({
-  title = "Armaan's Tech Tips - Gaming Hub, Utilities & PC Optimization",
-  description = "Your ultimate tech hub featuring unblocked games, free utilities, PC optimization guides, and educational resources. Password generator, QR codes, color picker, and more tools for students.",
-  keywords = "tech tips, unblocked games, pc optimization, utilities, password generator, qr code generator, color picker, text converter, gaming hub, student tools, free utilities, windows optimization, tech guides, educational resources, computer tips, gaming tips",
+  title = "Armaan's Tech Tips - Best Unblocked Games Hub | Free Gaming Site 2025",
+  description = "🎮 #1 Unblocked Games Site! Play 100+ free games instantly - no downloads needed. Featuring popular titles, utility tools, PC optimization guides & exclusive gaming content. Start playing now!",
+  keywords = "unblocked games, free online games, school games unblocked, gaming hub 2025, play games online free, best unblocked games site, no download games, browser games, student games, retro bowl unblocked, slope unblocked, gaming website, pc optimization, tech utilities, password generator, qr code generator, gaming tips, tech tips, free utilities, windows optimization, gaming guides, educational games, study tools, tech hub, game collection, instant play games, web games, casual games, addictive games",
   ogImage = "/placeholder.svg",
   canonical: canonicalOverride
 }) => {

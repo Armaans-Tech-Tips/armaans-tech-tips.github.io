@@ -95,7 +95,8 @@ export const UserPrefsSchema = z.object({
     soundEnabled: z.boolean().default(true),
     onboardingCompleted: z.boolean().default(false),
     streakCount: z.number().min(0).default(0),
-    lastVisitDate: z.string().optional()
+    lastVisitDate: z.string().optional(),
+    achievements: z.array(z.string()).default([])
   }).default({}),
   collections: z.array(CollectionSchema).default([])
 });
