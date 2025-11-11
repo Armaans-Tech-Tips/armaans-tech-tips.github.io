@@ -20,8 +20,6 @@ export const Navbar: React.FC = () => {
           { label: "Games", href: "/games", requiresAuth: true, isRoute: true },
           { label: "Entertainment", href: "/entertainment", requiresAuth: true, isRoute: true },
           { label: "Utilities", href: "/utilities", requiresAuth: true, isRoute: true },
-          { label: "PC Optimizations", href: "/optimizations", requiresAuth: true, isRoute: true },
-          { label: "Education", href: "/education", requiresAuth: true, isRoute: true }
         ]
       : [
           { label: "Utilities", href: "#utilities", isRoute: false },

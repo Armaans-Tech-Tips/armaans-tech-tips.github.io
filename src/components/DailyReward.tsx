@@ -26,7 +26,7 @@ export function DailyReward({ streakCount }: DailyRewardProps) {
     const today = new Date().toDateString();
     localStorage.setItem('lastDailyReward', today);
     setClaimed(true);
-    setTimeout(() => setShowReward(false), 2000);
+    setTimeout(() => setShowReward(false), 1500);
   };
 
   const getRewardEmoji = () => {

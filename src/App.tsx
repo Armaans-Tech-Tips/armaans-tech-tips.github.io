@@ -9,7 +9,6 @@ import { AuthProvider, useAuth } from "@/contexts/AuthContext";
 import { UserPrefsProvider } from "@/contexts/UserPrefsContext";
 import { CommandPalette } from "@/components/CommandPalette";
 import { CoachMarks } from "@/components/CoachMarks";
-import { HiddenPumpkin } from "@/components/HiddenPumpkin";
 import ThanksgivingTheme from "@/components/ThanksgivingTheme";
 import "./styles/thanksgiving.css";
 import Index from "./pages/Index";
@@ -107,7 +106,6 @@ const App = () => {
             <Sonner />
             <CommandPalette />
             <CoachMarks />
-            <HiddenPumpkin />
             <ThanksgivingTheme />
             <AppContent />
           </UserPrefsProvider>

@@ -102,14 +102,14 @@ const EntertainmentPage: React.FC = () => {
           transition={{ duration: 0.5, delay: 0.1 }}
           className="mb-8"
         >
-          <Alert className="bg-amber-950/20 border-amber-600">
-            <AlertTriangle className="h-5 w-5 text-amber-500" />
-            <AlertDescription className="text-sm text-amber-200">
-              <strong className="font-bold">IMPORTANT LEGAL DISCLAIMER:</strong>
-              <br />
+          <Alert className="bg-amber-950/30 border-2 border-amber-600/80">
+            <AlertTriangle className="h-5 w-5 text-amber-400" />
+            <AlertDescription className="text-sm text-amber-100/90 leading-relaxed">
+              <strong className="font-bold text-amber-50">IMPORTANT LEGAL DISCLAIMER:</strong>
+              <br /><br />
               These links are provided for educational and informational purposes only. 
               We are not responsible for the content, availability, or legality of third-party services. 
-              Users are responsible for complying with their school's policies and applicable copyright laws. 
+              Users are responsible for complying with their school&apos;s policies and applicable copyright laws. 
               By accessing these links, you acknowledge that you use them at your own risk. 
               We do not host, distribute, or control any of the linked content and cannot be held liable for any issues arising from their use.
               Always respect content creators and consider supporting official streaming services.
