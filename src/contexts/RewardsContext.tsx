@@ -64,15 +64,31 @@ export const RewardsProvider: React.FC<{ children: React.ReactNode }> = ({ child
     return false;
   };
 
-  // Sync between tabs
+  // Sync points and purchases between tabs
   useEffect(() => {
-    const handleStorage = () => {
-      setPoints(parseInt(localStorage.getItem('rewardPoints') || '0'));
-      setPurchases(JSON.parse(localStorage.getItem('purchases') || '[]'));
+    const handleStorage = (e: StorageEvent) => {
+      if (e.key === 'rewardPoints' || e.key === 'purchases') {
+        setPoints(parseInt(localStorage.getItem('rewardPoints') || '0'));
+        setPurchases(JSON.parse(localStorage.getItem('purchases') || '[]'));
+      }
     };
     window.addEventListener('storage', handleStorage);
     return () => window.removeEventListener('storage', handleStorage);
   }, []);
+
+  // Update leaderboard on login and when points change
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    
+    const username = localStorage.getItem('username') || 'Anonymous';
+    const leaderboard = JSON.parse(localStorage.getItem('leaderboard') || '{}');
+    
+    // Update current user's score in leaderboard
+    if (username && points !== leaderboard[username]) {
+      leaderboard[username] = points;
+      localStorage.setItem('leaderboard', JSON.stringify(leaderboard));
+    }
+  }, [points]);
 
   return (
     <RewardsContext.Provider value={{ points, addPoints, spendPoints, purchases, purchaseItem }}>

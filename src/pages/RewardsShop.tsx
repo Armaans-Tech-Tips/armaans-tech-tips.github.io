@@ -71,10 +71,11 @@ const RewardsShop: React.FC = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 py-8 min-h-screen bg-gamer-bg">
       <div className="mb-8 text-center">
-        <h1 className="text-4xl font-bold mb-2">Armaan's Tech Tips Shop</h1>
-        <div className="text-2xl font-semibold text-gamer-accent">
+        <h1 className="text-4xl font-rowdies font-bold mb-2 text-gamer-text">Rewards Shop 🎁</h1>
+        <div className="text-2xl font-semibold text-gamer-accent flex items-center justify-center gap-2">
+          <span className="text-3xl">🪙</span>
           {points} Points
         </div>
       </div>
@@ -101,13 +102,13 @@ const RewardsShop: React.FC = () => {
                 <Button
                   onClick={() => handlePurchase(reward.id, reward.cost, reward.name)}
                   disabled={purchases.includes(reward.id)}
-                  className={`w-full ${
+                  className={`w-full transition-all ${
                     purchases.includes(reward.id)
-                      ? 'bg-green-600 hover:bg-green-700'
-                      : 'bg-gamer-accent hover:bg-gamer-accent/90'
+                      ? 'bg-accent/80 hover:bg-accent text-gamer-card cursor-default'
+                      : 'bg-gamer-accent hover:bg-gamer-accent/90 text-gamer-card'
                   }`}
                 >
-                  {purchases.includes(reward.id) ? 'Owned' : 'Purchase'}
+                  {purchases.includes(reward.id) ? '✓ Owned' : 'Purchase'}
                 </Button>
               </CardFooter>
             </Card>

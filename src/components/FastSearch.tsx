@@ -166,27 +166,27 @@ const FastSearch: React.FC<FastSearchProps> = ({ isOpen, onClose }) => {
 
   const getTypeColor = (type: string) => {
     switch (type) {
-      case 'game': return 'bg-blue-500/20 text-blue-300 border-blue-400';
-      case 'utility': return 'bg-purple-500/20 text-purple-300 border-purple-400';
-      case 'guide': return 'bg-green-500/20 text-green-300 border-green-400';
-      default: return 'bg-gray-500/20 text-gray-300 border-gray-400';
+      case 'game': return 'bg-gamer-accent/20 text-gamer-accent border-gamer-accent/40';
+      case 'utility': return 'bg-primary/20 text-primary border-primary/40';
+      case 'guide': return 'bg-accent/20 text-accent border-accent/40';
+      default: return 'bg-gamer-muted/20 text-gamer-muted border-gamer-border';
     }
   };
 
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-start justify-center pt-16 px-4">
-      <Card className="w-full max-w-2xl bg-slate-900 border-slate-700 shadow-2xl">
+    <div className="fixed inset-0 bg-gamer-bg/80 backdrop-blur-sm z-50 flex items-start justify-center pt-16 px-4">
+      <Card className="w-full max-w-2xl bg-gamer-card border-gamer-border shadow-2xl">
         <CardContent className="p-4">
           {/* Search Input */}
           <div className="relative mb-4">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gamer-muted" />
             <Input
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Search games, utilities, guides..."
-              className="pl-10 bg-slate-800 border-slate-600 text-white placeholder-gray-400 focus:border-blue-500"
+              className="pl-10 bg-gamer-bg border-gamer-border text-gamer-text placeholder-gamer-muted focus:border-gamer-accent focus:ring-gamer-accent"
               autoFocus
             />
           </div>
@@ -194,12 +194,12 @@ const FastSearch: React.FC<FastSearchProps> = ({ isOpen, onClose }) => {
           {/* Results */}
           <div className="max-h-96 overflow-y-auto">
             {query.length < 2 ? (
-              <div className="text-center text-gray-400 py-8">
+              <div className="text-center text-gamer-muted py-8">
                 <Search className="h-8 w-8 mx-auto mb-2 opacity-50" />
                 <p>Type at least 2 characters to search</p>
               </div>
             ) : results.length === 0 ? (
-              <div className="text-center text-gray-400 py-8">
+              <div className="text-center text-gamer-muted py-8">
                 <Search className="h-8 w-8 mx-auto mb-2 opacity-50" />
                 <p>No results found for "{query}"</p>
               </div>
@@ -208,10 +208,10 @@ const FastSearch: React.FC<FastSearchProps> = ({ isOpen, onClose }) => {
                 {results.map((result, index) => (
                   <div
                     key={`${result.type}-${result.id}`}
-                    className={`p-3 rounded-lg border cursor-pointer transition-colors ${
+                    className={`p-3 rounded-lg border cursor-pointer transition-all duration-fast ${
                       index === selectedIndex
-                        ? 'bg-blue-500/20 border-blue-400'
-                        : 'bg-slate-800 border-slate-700 hover:bg-slate-700'
+                        ? 'bg-gamer-accent/20 border-gamer-accent'
+                        : 'bg-gamer-bg border-gamer-border hover:bg-gamer-bg/50 hover:border-gamer-accent/50'
                     }`}
                     onClick={() => handleSelect(result)}
                   >
@@ -222,31 +222,31 @@ const FastSearch: React.FC<FastSearchProps> = ({ isOpen, onClose }) => {
 
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-2 mb-1">
-                          <h3 className="font-medium text-white truncate">{result.title}</h3>
+                          <h3 className="font-medium text-gamer-text truncate">{result.title}</h3>
                           {result.featured && (
-                            <Badge className="bg-yellow-500/20 text-yellow-300 text-xs">
+                            <Badge className="bg-accent/20 text-accent text-xs border-accent/40">
                               <Star className="h-3 w-3 mr-1" />
                               Featured
                             </Badge>
                           )}
                         </div>
 
-                        <p className="text-sm text-gray-400 line-clamp-2 mb-2">
+                        <p className="text-sm text-gamer-muted line-clamp-2 mb-2">
                           {result.description}
                         </p>
 
-                        <div className="flex items-center gap-2">
+                        <div className="flex items-center gap-2 flex-wrap">
                           <Badge variant="outline" className={getTypeColor(result.type)}>
                             {result.type}
                           </Badge>
                           {result.category && (
-                            <Badge variant="outline" className="text-xs text-gray-400">
+                            <Badge variant="outline" className="text-xs text-gamer-muted border-gamer-border">
                               {result.category}
                             </Badge>
                           )}
                           <div className="flex gap-1">
                             {result.tags.slice(0, 3).map(tag => (
-                              <Badge key={tag} className="text-xs bg-slate-700 text-gray-300">
+                              <Badge key={tag} className="text-xs bg-gamer-border/30 text-gamer-muted border-gamer-border">
                                 {tag}
                               </Badge>
                             ))}
@@ -254,7 +254,7 @@ const FastSearch: React.FC<FastSearchProps> = ({ isOpen, onClose }) => {
                         </div>
                       </div>
 
-                      <ArrowRight className="h-4 w-4 text-gray-500" />
+                      <ArrowRight className="h-4 w-4 text-gamer-muted" />
                     </div>
                   </div>
                 ))}
@@ -263,10 +263,10 @@ const FastSearch: React.FC<FastSearchProps> = ({ isOpen, onClose }) => {
           </div>
 
           {/* Footer */}
-          <div className="mt-4 pt-3 border-t border-slate-700 text-xs text-gray-400">
+          <div className="mt-4 pt-3 border-t border-gamer-border text-xs text-gamer-muted">
             <div className="flex justify-between items-center">
               <span>↑↓ Navigate • Enter Select • Esc Close</span>
-              <span>{results.length} results</span>
+              <span>{results.length} {results.length === 1 ? 'result' : 'results'}</span>
             </div>
           </div>
         </CardContent>

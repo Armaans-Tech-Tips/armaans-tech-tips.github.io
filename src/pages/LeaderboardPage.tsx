@@ -35,11 +35,11 @@ const LeaderboardPage: React.FC = () => {
   const currentUserRank = leaderboard.findIndex(user => user.isCurrentUser) + 1;
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 py-8 min-h-screen bg-gamer-bg">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold mb-2">Leaderboard</h1>
-          <p className="text-gamer-muted">Top players by Armaan's Tech Tips points</p>
+          <h1 className="text-4xl font-rowdies font-bold mb-2 text-gamer-text">🏆 Leaderboard</h1>
+          <p className="text-gamer-muted">Top players by points earned</p>
         </div>
 
         {/* Current User's Rank */}

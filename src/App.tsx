@@ -22,7 +22,6 @@ import OptimizationsPage from "./pages/OptimizationsPage";
 import EducationPage from "./pages/EducationPage";
 import LinksPage from "./pages/LinksPage";
 import UpdatesPage from "./pages/UpdatesPage";
-import SettingsPage from "./pages/SettingsPage";
 import LegalPage from "./pages/LegalPage";
 import NotFound from "./pages/NotFound";
 import RewardsShop from "./pages/RewardsShop";
