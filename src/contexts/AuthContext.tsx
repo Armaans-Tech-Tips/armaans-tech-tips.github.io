@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect, useCallback, useRef } from "react";
-import { signInWithEmailAndPassword, signOut, onAuthStateChanged, User, setPersistence, browserSessionPersistence } from "firebase/auth";
+import { signInWithEmailAndPassword, signOut, onAuthStateChanged, User } from "firebase/auth";
 import { auth } from "@/lib/firebase";
 
 interface AuthContextType {
@@ -53,9 +53,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   }, [user, resetInactivityTimer]);
 
   useEffect(() => {
-    // Set session persistence to SESSION (logout on browser close/refresh)
-    setPersistence(auth, browserSessionPersistence).catch(console.error);
-
     const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
       setUser(firebaseUser);
       setLoading(false);
@@ -66,16 +63,15 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const login = async (email: string, password: string): Promise<{ success: boolean; error?: string }> => {
     try {
-      // Ensure session persistence before login
-      await setPersistence(auth, browserSessionPersistence);
       await signInWithEmailAndPassword(auth, email, password);
       return { success: true };
     } catch (error: any) {
+      console.error('Login error:', error);
       return { 
         success: false, 
         error: error.code === 'auth/invalid-credential' 
           ? 'Invalid email or password' 
-          : 'Login failed. Please try again.'
+          : error.message || 'Login failed. Please try again.'
       };
     }
   };
