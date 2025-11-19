@@ -11,6 +11,6 @@ export const asset = (p: string) => withBase(p);
 
 // Canonical for SEO (HashRouter URLs)
 export const canonical = (hashPath = '/') =>
-  `https://subset28.github.io${withBase('')}${
+  `https://subset28.github.io/Anonymous-Tech-Tips${
     hashPath.startsWith('/#') ? hashPath : `/#${hashPath.replace(/^\//, '')}` 
   }`;

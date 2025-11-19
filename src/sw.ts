@@ -28,7 +28,7 @@ self.addEventListener('message', (event) => {
 // @ts-ignore
 precacheAndRoute(self.__WB_MANIFEST);
 
-const basePath = self.location.pathname.split('/').slice(0, -1).join('/') || '/';
+const basePath = '/Anonymous-Tech-Tips';
 const navigationHandler = createHandlerBoundToURL(`${basePath}/index.html`);
 const navigationRoute = new NavigationRoute(navigationHandler, {
   allowlist: [new RegExp(`^${basePath.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}/.*$`)],
