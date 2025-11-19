@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect, useCallback, useRef } from "react";
-import { signInWithEmailAndPassword, signOut, onAuthStateChanged, User } from "firebase/auth";
+import { signInWithEmailAndPassword, signOut, onAuthStateChanged, User, browserSessionPersistence, setPersistence } from "firebase/auth";
 import { auth } from "@/lib/firebase";
 
 interface AuthContextType {
@@ -63,6 +63,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const login = async (email: string, password: string): Promise<{ success: boolean; error?: string }> => {
     try {
+      // Set session-only persistence - user will be logged out when tab/browser closes
+      await setPersistence(auth, browserSessionPersistence);
       await signInWithEmailAndPassword(auth, email, password);
       return { success: true };
     } catch (error: any) {

@@ -49,7 +49,7 @@ const LoginPage = () => {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-4" autoComplete="off">
             <div className="space-y-2">
               <Label htmlFor="email" className="text-gamer-text">Email</Label>
               <Input
@@ -61,6 +61,10 @@ const LoginPage = () => {
                 disabled={loading}
                 className="bg-gamer-bg border-gamer-border text-gamer-text"
                 placeholder="Enter email"
+                autoComplete="off"
+                autoCorrect="off"
+                autoCapitalize="off"
+                spellCheck="false"
               />
             </div>
             <div className="space-y-2">
@@ -74,6 +78,10 @@ const LoginPage = () => {
                 disabled={loading}
                 className="bg-gamer-bg border-gamer-border text-gamer-text"
                 placeholder="Enter password"
+                autoComplete="new-password"
+                autoCorrect="off"
+                autoCapitalize="off"
+                spellCheck="false"
               />
             </div>
             {error && (
