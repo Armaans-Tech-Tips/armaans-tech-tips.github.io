@@ -42,7 +42,8 @@ export class ErrorBoundary extends Component<Props, State> {
 
   private handleReset = () => {
     this.setState({ hasError: false, error: undefined, errorInfo: undefined, copied: false });
-    window.location.href = "/";
+    const basePath = import.meta.env.BASE_URL || "/";
+    window.location.href = `${basePath}#/`;
   };
 
   private handleReload = () => {
