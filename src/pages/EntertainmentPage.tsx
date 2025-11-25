@@ -176,7 +176,20 @@ const EntertainmentPage: React.FC = () => {
                   onClick={() => {
                     const newWindow = window.open('about:blank');
                     if (newWindow) {
-                      newWindow.location.href = service.url;
+                      newWindow.document.write(`
+                        <!DOCTYPE html>
+                        <html>
+                          <head>
+                            <meta name="referrer" content="no-referrer">
+                            <meta http-equiv="refresh" content="0; url=${service.url}">
+                            <title>Loading...</title>
+                          </head>
+                          <body>
+                            <script>window.location.href = '${service.url}';</script>
+                          </body>
+                        </html>
+                      `);
+                      newWindow.document.close();
                     }
                   }}
                 >
