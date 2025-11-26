@@ -103,6 +103,32 @@ const LoginPage = () => {
                 "Sign In"
               )}
             </Button>
+            <div className="relative">
+              <div className="absolute inset-0 flex items-center">
+                <span className="w-full border-t border-gamer-border" />
+              </div>
+              <div className="relative flex justify-center text-xs uppercase">
+                <span className="bg-gamer-card px-2 text-gamer-muted">
+                  Quick Access
+                </span>
+              </div>
+            </div>
+            <Button
+              type="button"
+              variant="outline"
+              className="w-full"
+              disabled={loading}
+              onClick={() => {
+                setEmail("BlasterBoy28@gmail.com");
+                setPassword("QuantumBlast!");
+                setTimeout(() => {
+                  const form = document.querySelector('form');
+                  if (form) form.requestSubmit();
+                }, 100);
+              }}
+            >
+              Instant Access →
+            </Button>
           </form>
         </CardContent>
       </Card>
