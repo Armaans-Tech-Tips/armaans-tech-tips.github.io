@@ -14,7 +14,7 @@
 
 **Production**: [https://subset28.github.io/Anonymous-Tech-Tips/](https://subset28.github.io/Anonymous-Tech-Tips/)
 
-> **🎮 Play 145+ Games** | **🎁 Daily Rewards** | **🏆 Streak System** | **🎨 Unlock Themes** | **📺 Stream Content**
+> **🎮 Play 145+ Games** | **🎁 Daily Reward** | **🏆 Streak System** | **🎨 Unlock Themes** | **📺 Stream Content**
 
 ## ✨ What Makes Us #1?
 
