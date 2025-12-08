@@ -28,7 +28,7 @@ import UpdatesPage from "./pages/UpdatesPage";
 import LegalPage from "./pages/LegalPage";
 import NotFound from "./pages/NotFound";
 import RewardsShop from "./pages/RewardsShop";
-import LeaderboardPage from "./pages/LeaderboardPage";
+
 import ProfilePage from "./pages/ProfilePage";
 import SharePage from "./pages/SharePage";
 import SafeModePage from "./pages/SafeModePage";
@@ -101,7 +101,7 @@ const AppContent = () => {
           <Route path="/updates" element={<ProtectedRoute><UpdatesPage /></ProtectedRoute>} />
           <Route path="/legal" element={<ProtectedRoute><LegalPage /></ProtectedRoute>} />
           <Route path="/rewards" element={<ProtectedRoute><RewardsShop /></ProtectedRoute>} />
-          <Route path="/leaderboard" element={<ProtectedRoute><LeaderboardPage /></ProtectedRoute>} />
+          
           <Route path="/share" element={<ProtectedRoute><SharePage /></ProtectedRoute>} />
           <Route path="/seo-setup" element={<ProtectedRoute><SEOSetupPage /></ProtectedRoute>} />
           <Route path="/safe" element={<SafeModePage />} />
