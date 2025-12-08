@@ -69,7 +69,7 @@ export const ContentSection: React.FC<ContentSectionProps> = ({
             {description}
           </p>
 
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 min-h-[60vh]">
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {items.map((item, index) => {
               const itemText = typeof item === 'string' ? item : item.text;
               const itemUrl = typeof item === 'string' ? undefined : item.url;
