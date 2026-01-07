@@ -1,0 +1,149 @@
+import React from "react";
+import { Wrench, Shield, Globe, Zap, Lock, Eye, FileText } from "lucide-react";
+import { Navbar } from "@/components/Navbar";
+import { ShareBanner } from "@/components/ShareBanner";
+import { ContentSection } from "@/components/ContentSection";
+import { SEO } from "@/components/SEO";
+import { Footer } from "@/components/Footer";
+import { useAuth } from "@/contexts/AuthContext";
+import { TopBannerAd, BottomAd, InContentAd } from "@/components/GoogleAd";
+
+const UtilitiesPage = () => {
+  const { isAuthenticated } = useAuth();
+
+  // Premium utilities for logged-in users
+  const premiumUtilities: Array<{ text: string; url?: string; utility?: "password" | "color" | "text" | "qr" }> = [
+    { text: "❄️ Snow Day Predictor", url: "https://docs.google.com/spreadsheets/d/1VULC1vySGCZNfaU6XuQ4-u5IEsL-s0s2wzWM6TgPZPs/edit?usp=sharing" },
+    { text: "🌐 Holy Unblocker - Web Proxy", url: "https://holyubofficial.net/" },
+  ];
+
+  // Adblocking & Privacy
+  const adblockPrivacy: Array<{ text: string; url?: string }> = [
+    { text: "🛡️ uBlock Origin - Best Adblocker", url: "https://ublockorigin.com/" },
+    { text: "📺 SponsorBlock - Skip YouTube Sponsors", url: "https://sponsor.ajay.app/" },
+    { text: "🔇 Spotify Adblocker (SpotX)", url: "https://github.com/SpotX-Official/SpotX" },
+    { text: "🎮 Discord Adblock", url: "https://github.com/BetterDiscord/BetterDiscord" },
+    { text: "🍪 ClearURLs - Remove Tracking", url: "https://docs.clearurls.xyz/" },
+  ];
+
+  // VPN & Proxy
+  const vpnProxy: Array<{ text: string; url?: string }> = [
+    { text: "☁️ Cloudflare WARP - Free VPN", url: "https://1.1.1.1/" },
+    { text: "🔐 Proton VPN - Free Tier", url: "https://protonvpn.com/" },
+    { text: "💨 Windscribe - 10GB Free", url: "https://windscribe.com/" },
+    { text: "🌍 CroxyProxy - Web Proxy", url: "https://www.croxyproxy.com/" },
+    { text: "🔓 Blockaway - Proxy", url: "https://www.blockaway.net/" },
+  ];
+
+  // Streaming & Entertainment
+  const streaming: Array<{ text: string; url?: string }> = [
+    { text: "🎬 Stremio - Stream Anything", url: "https://www.stremio.com/" },
+    { text: "📺 Tubi - Free Movies/TV", url: "https://tubitv.com/" },
+    { text: "🎥 Pluto TV - Free Live TV", url: "https://pluto.tv/" },
+    { text: "🎞️ Internet Archive - Classic Films", url: "https://archive.org/details/movies" },
+  ];
+
+  // Productivity & Tools
+  const productivity: Array<{ text: string; url?: string; utility?: "password" | "color" | "text" | "qr" }> = [
+    { text: "🔐 Password Generator", utility: "password" },
+    { text: "🎨 Color Picker", utility: "color" },
+    { text: "📝 Text Converter", utility: "text" },
+    { text: "📱 QR Code Generator", utility: "qr" },
+    { text: "⚡ Speedtest.net", url: "https://www.speedtest.net/" },
+    { text: "🌐 Google Translate", url: "https://translate.google.com/" },
+  ];
+
+  // Public utilities (not logged in)
+  const publicItems: Array<{ text: string; url?: string; utility?: "password" | "color" | "text" | "qr" }> = [
+    { text: "🔐 Password Generator", utility: "password" },
+    { text: "🎨 Color Picker", utility: "color" },
+    { text: "📝 Text Converter", utility: "text" },
+    { text: "📱 QR Code Generator", utility: "qr" },
+    { text: "🛡️ uBlock Origin - Best Adblocker", url: "https://ublockorigin.com/" },
+    { text: "⚡ Speedtest.net - Internet Speed", url: "https://www.speedtest.net/" },
+    { text: "🌐 Google Translate", url: "https://translate.google.com/" },
+  ];
+
+  return (
+    <>
+      <SEO 
+        title={isAuthenticated ? "Premium Utilities | Tech Tips" : "Free Utilities & Tools | Tech Tips"}
+        description="Free online utilities including password generator, color picker, text converter, QR code generator, and more essential tools for students."
+        keywords="password generator, color picker, text converter, qr code generator, free utilities, online tools, adblocker, vpn, proxy, streaming"
+      />
+      <div className={`min-h-screen ${isAuthenticated ? "bg-gamer-bg" : "bg-background"}`}>
+        <ShareBanner />
+        <Navbar />
+
+        <TopBannerAd />
+
+        {isAuthenticated ? (
+          <>
+            {/* Premium Utilities */}
+            <ContentSection
+              id="premium-utilities"
+              icon={Zap}
+              title="🎁 Premium Tools"
+              description="Exclusive tools for members"
+              items={premiumUtilities}
+            />
+
+            <InContentAd />
+
+            {/* Adblocking & Privacy */}
+            <ContentSection
+              id="adblock-privacy"
+              icon={Shield}
+              title="🛡️ Adblocking & Privacy"
+              description="Block ads, trackers, and protect your privacy"
+              items={adblockPrivacy}
+            />
+
+            {/* VPN & Proxy */}
+            <ContentSection
+              id="vpn-proxy"
+              icon={Lock}
+              title="🔐 VPN & Proxy"
+              description="Bypass restrictions and browse anonymously"
+              items={vpnProxy}
+            />
+
+            <InContentAd />
+
+            {/* Streaming */}
+            <ContentSection
+              id="streaming"
+              icon={Eye}
+              title="🎬 Streaming & Entertainment"
+              description="Free movies, TV, and media"
+              items={streaming}
+            />
+
+            {/* Productivity */}
+            <ContentSection
+              id="productivity"
+              icon={Wrench}
+              title="⚙️ Productivity Tools"
+              description="Essential everyday utilities"
+              items={productivity}
+            />
+          </>
+        ) : (
+          <ContentSection
+            id="utilities"
+            icon={Wrench}
+            title="Utilities & Tools"
+            description="Essential tools and utilities to enhance your experience"
+            items={publicItems}
+          />
+        )}
+
+        <BottomAd />
+
+        <Footer />
+      </div>
+    </>
+  );
+};
+
+export default UtilitiesPage;
