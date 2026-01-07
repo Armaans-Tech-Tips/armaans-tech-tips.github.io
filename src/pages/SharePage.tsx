@@ -14,7 +14,7 @@ const SharePage = () => {
   const [copiedItem, setCopiedItem] = useState<string | null>(null);
   const [qrDataUrl, setQrDataUrl] = useState<string>("");
 
-  const siteUrl = "https://armaans-tech-tips.github.io";
+  const siteUrl = "https://anonymous-tech-tips.github.io";
   const safeUrl = `${siteUrl}/#/safe`;
 
   React.useEffect(() => {
