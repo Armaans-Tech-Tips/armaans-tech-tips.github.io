@@ -10,10 +10,12 @@ permissions:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          repository: anonymous-tech-tips/anonymous-tech-tips.github.io
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Set up Node
         uses: actions/setup-node@v4
@@ -49,6 +51,7 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
+          repository: anonymous-tech-tips/anonymous-tech-tips.github.io
           branch: gh-pages
           folder: dist
           clean: true

@@ -12,6 +12,9 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
+        with:
+          repository: anonymous-tech-tips/anonymous-tech-tips.github.io
+          token: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Setup Node.js
       uses: actions/setup-node@v4
@@ -41,6 +44,9 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
+        with:
+          repository: anonymous-tech-tips/anonymous-tech-tips.github.io
+          token: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Setup Node.js
       uses: actions/setup-node@v4
@@ -72,6 +78,9 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
+        with:
+          repository: anonymous-tech-tips/anonymous-tech-tips.github.io
+          token: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Setup Node.js
       uses: actions/setup-node@v4
