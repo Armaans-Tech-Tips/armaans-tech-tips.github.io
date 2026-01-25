@@ -16,17 +16,13 @@ const UtilitiesPage = () => {
     { text: "🌐 Holy Unblocker - Web Proxy", url: "https://holyubofficial.net/" },
   ];
 
-  // Adblocking & Privacy
-  const adblockPrivacy: Array<{ text: string; url?: string }> = [
+  // Privacy & Security (consolidated)
+  const privacySecurity: Array<{ text: string; url?: string }> = [
     { text: "🛡️ uBlock Origin - Best Adblocker", url: "https://ublockorigin.com/" },
     { text: "📺 SponsorBlock - Skip YouTube Sponsors", url: "https://sponsor.ajay.app/" },
     { text: "🔇 Spotify Adblocker (SpotX)", url: "https://github.com/SpotX-Official/SpotX" },
     { text: "🎮 Discord Adblock", url: "https://github.com/BetterDiscord/BetterDiscord" },
     { text: "🍪 ClearURLs - Remove Tracking", url: "https://docs.clearurls.xyz/" },
-  ];
-
-  // VPN & Proxy
-  const vpnProxy: Array<{ text: string; url?: string }> = [
     { text: "☁️ Cloudflare WARP - Free VPN", url: "https://1.1.1.1/" },
     { text: "🔐 Proton VPN - Free Tier", url: "https://protonvpn.com/" },
     { text: "💨 Windscribe - 10GB Free", url: "https://windscribe.com/" },
@@ -34,13 +30,7 @@ const UtilitiesPage = () => {
     { text: "🔓 Blockaway - Proxy", url: "https://www.blockaway.net/" },
   ];
 
-  // Streaming & Entertainment
-  const streaming: Array<{ text: string; url?: string }> = [
-    { text: "🎬 Stremio - Stream Anything", url: "https://www.stremio.com/" },
-    { text: "📺 Tubi - Free Movies/TV", url: "https://tubitv.com/" },
-    { text: "🎥 Pluto TV - Free Live TV", url: "https://pluto.tv/" },
-    { text: "🎞️ Internet Archive - Classic Films", url: "https://archive.org/details/movies" },
-  ];
+
 
   // Productivity & Tools
   const productivity: Array<{ text: string; url?: string; utility?: "password" | "color" | "text" | "qr" }> = [
@@ -65,7 +55,7 @@ const UtilitiesPage = () => {
 
   return (
     <>
-      <SEO 
+      <SEO
         title={isAuthenticated ? "Premium Utilities | Tech Tips" : "Free Utilities & Tools | Tech Tips"}
         description="Free online utilities including password generator, color picker, text converter, QR code generator, and more essential tools for students."
         keywords="password generator, color picker, text converter, qr code generator, free utilities, online tools, adblocker, vpn, proxy, streaming"
@@ -75,7 +65,7 @@ const UtilitiesPage = () => {
           <>
             {/* Authenticated view - consistent with Games/Profile/Rewards pages */}
             <TopBannerAd />
-            
+
             <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
               <h1 className="text-3xl md:text-4xl font-bold font-rowdies text-gamer-text mb-8">
                 🛠️ Utilities & Tools
@@ -92,34 +82,16 @@ const UtilitiesPage = () => {
 
               <InContentAd />
 
-              {/* Adblocking & Privacy */}
+              {/* Privacy & Security */}
               <ContentSection
-                id="adblock-privacy"
+                id="privacy-security"
                 icon={Shield}
-                title="🛡️ Adblocking & Privacy"
-                description="Block ads, trackers, and protect your privacy"
-                items={adblockPrivacy}
-              />
-
-              {/* VPN & Proxy */}
-              <ContentSection
-                id="vpn-proxy"
-                icon={Lock}
-                title="🔐 VPN & Proxy"
-                description="Bypass restrictions and browse anonymously"
-                items={vpnProxy}
+                title="🔐 Privacy & Security"
+                description="Adblocking, VPN, proxy, and privacy tools"
+                items={privacySecurity}
               />
 
               <InContentAd />
-
-              {/* Streaming */}
-              <ContentSection
-                id="streaming"
-                icon={Eye}
-                title="🎬 Streaming & Entertainment"
-                description="Free movies, TV, and media"
-                items={streaming}
-              />
 
               {/* Productivity */}
               <ContentSection
@@ -139,7 +111,7 @@ const UtilitiesPage = () => {
             {/* Unauthenticated view - public layout */}
             <ShareBanner />
             <TopBannerAd />
-            
+
             <ContentSection
               id="utilities"
               icon={Wrench}

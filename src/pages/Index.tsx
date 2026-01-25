@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { 
-  BookOpen, Calculator, Clock, Search, GraduationCap, 
-  Atom, Globe, Code, PenTool, Database, 
+import {
+  BookOpen, Calculator, Clock, Search, GraduationCap,
+  Atom, Globe, Code, PenTool, Database,
   Microscope, ChevronRight, PlayCircle, Quote, Check, Copy
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -19,11 +19,11 @@ import { toast } from "sonner";
 
 const AcademicHome = () => {
   // --- INTERACTIVE TOOL STATES ---
-  
+
   // 1. Pomodoro Timer
   const [timeLeft, setTimeLeft] = useState(25 * 60);
   const [isActive, setIsActive] = useState(false);
-  
+
   useEffect(() => {
     let interval: NodeJS.Timeout;
     if (isActive && timeLeft > 0) {
@@ -58,7 +58,7 @@ const AcademicHome = () => {
         else if (score >= 80) points = 3;
         else if (score >= 70) points = 2;
         else if (score >= 60) points = 1;
-        
+
         totalPoints += points * w;
         totalWeights += w;
       }
@@ -74,10 +74,10 @@ const AcademicHome = () => {
 
   const handleCitation = () => {
     if (!citeUrl) return toast.error("Please enter a URL first");
-    
+
     const date = new Date().toLocaleDateString();
     let citation = "";
-    
+
     if (citeStyle === "MLA 9") {
       citation = `Unknown Author. "Web Page Title." Website Name, Publisher, ${date}, ${citeUrl}.`;
     } else if (citeStyle === "APA 7") {
@@ -98,11 +98,11 @@ const AcademicHome = () => {
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 font-sans selection:bg-teal-100">
-      
+
       {/* --- HERO SECTION --- */}
       <section className="bg-white border-b border-slate-200 pt-20 pb-16 px-6 relative z-10">
         <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             className="space-y-6"
@@ -115,17 +115,17 @@ const AcademicHome = () => {
               Academic Portal v2.4 Live
             </div>
             <h1 className="text-5xl md:text-6xl font-bold tracking-tight text-slate-900">
-              Accelerate Your <br/>
+              Accelerate Your <br />
               <span className="text-teal-700">Learning Potential</span>
             </h1>
             <p className="text-lg text-slate-600 max-w-xl leading-relaxed">
-              Access essential tools, curated research databases, and study optimization resources. 
+              Access essential tools, curated research databases, and study optimization resources.
               Designed for the modern scholar.
             </p>
             <div className="flex gap-4 pt-2">
-              <Button 
+              <Button
                 onClick={scrollToResources}
-                size="lg" 
+                size="lg"
                 className="bg-teal-700 hover:bg-teal-800 text-white rounded-md px-8 h-12 text-base shadow-sm"
               >
                 Explore Resources
@@ -153,21 +153,21 @@ const AcademicHome = () => {
               </div>
               <span className="text-xs font-medium text-slate-500 ml-2">Quick Tools</span>
             </div>
-            
+
             <Tabs defaultValue="timer" className="w-full">
               <TabsList className="w-full grid grid-cols-3 bg-slate-50 p-1 border-b border-slate-200">
                 <TabsTrigger value="timer" className="data-[state=active]:bg-white data-[state=active]:shadow-sm text-xs md:text-sm">Focus Timer</TabsTrigger>
                 <TabsTrigger value="calc" className="data-[state=active]:bg-white data-[state=active]:shadow-sm text-xs md:text-sm">Grade Calc</TabsTrigger>
                 <TabsTrigger value="cite" className="data-[state=active]:bg-white data-[state=active]:shadow-sm text-xs md:text-sm">Citation</TabsTrigger>
               </TabsList>
-              
+
               {/* POMODORO */}
               <TabsContent value="timer" className="p-8 text-center space-y-6">
                 <div className="text-6xl font-mono font-bold text-slate-800 tracking-wider">
                   {formatTime(timeLeft)}
                 </div>
                 <div className="flex justify-center gap-4">
-                  <Button 
+                  <Button
                     onClick={() => setIsActive(!isActive)}
                     className={isActive ? "bg-amber-600 hover:bg-amber-700 text-white" : "bg-teal-600 hover:bg-teal-700 text-white"}
                   >
@@ -189,8 +189,8 @@ const AcademicHome = () => {
                   </div>
                   {grades.map((g, i) => (
                     <div key={i} className="flex gap-2">
-                      <Input 
-                        placeholder="95" 
+                      <Input
+                        placeholder="95"
                         value={g.grade}
                         type="number"
                         onChange={(e) => {
@@ -199,9 +199,9 @@ const AcademicHome = () => {
                           setGrades(newGrades);
                         }}
                       />
-                      <Input 
-                        placeholder="1.0" 
-                        className="w-20" 
+                      <Input
+                        placeholder="1.0"
+                        className="w-20"
                         value={g.weight}
                         type="number"
                         onChange={(e) => {
@@ -230,8 +230,8 @@ const AcademicHome = () => {
                 <div className="space-y-3">
                   <div className="space-y-1">
                     <label className="text-xs font-semibold text-slate-500">Source URL</label>
-                    <Input 
-                      placeholder="https://www.example.com/article" 
+                    <Input
+                      placeholder="https://www.example.com/article"
                       value={citeUrl}
                       onChange={(e) => setCiteUrl(e.target.value)}
                     />
@@ -240,11 +240,11 @@ const AcademicHome = () => {
                     <label className="text-xs font-semibold text-slate-500">Style</label>
                     <div className="flex gap-2">
                       {["MLA 9", "APA 7", "Chicago"].map((style) => (
-                        <Button 
+                        <Button
                           key={style}
                           onClick={() => setCiteStyle(style)}
-                          variant="outline" 
-                          size="sm" 
+                          variant="outline"
+                          size="sm"
                           className={`flex-1 ${citeStyle === style ? "bg-teal-50 border-teal-200 text-teal-700" : ""}`}
                         >
                           {style}
@@ -252,7 +252,7 @@ const AcademicHome = () => {
                       ))}
                     </div>
                   </div>
-                  <Button 
+                  <Button
                     onClick={handleCitation}
                     className="w-full bg-slate-800 hover:bg-slate-900 text-white mt-2"
                   >
@@ -262,6 +262,298 @@ const AcademicHome = () => {
               </TabsContent>
             </Tabs>
           </motion.div>
+        </div>
+      </section>
+
+      {/* --- ORIGINAL EDUCATIONAL CONTENT SECTION --- */}
+      <section className="max-w-7xl mx-auto px-6 py-16">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl font-bold text-slate-900 mb-3">Master Your Learning Journey</h2>
+          <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+            Evidence-based study techniques and comprehensive guides to help you learn more effectively
+          </p>
+        </div>
+
+        {/* Study Techniques Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+
+          {/* The Feynman Technique */}
+          <Card className="border-slate-200 shadow-sm">
+            <CardHeader>
+              <div className="flex items-start gap-3">
+                <div className="w-10 h-10 rounded-lg bg-teal-50 flex items-center justify-center flex-shrink-0">
+                  <BookOpen className="h-5 w-5 text-teal-600" />
+                </div>
+                <div>
+                  <CardTitle className="text-xl font-bold text-slate-900">The Feynman Technique</CardTitle>
+                  <p className="text-sm text-slate-500 mt-1">Learn by Teaching</p>
+                </div>
+              </div>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <p className="text-slate-700 leading-relaxed">
+                Named after Nobel Prize-winning physicist Richard Feynman, this technique helps you truly understand concepts by explaining them in simple terms. It's one of the most powerful learning methods available.
+              </p>
+              <div className="space-y-3">
+                <h4 className="font-semibold text-slate-900">How to Use It:</h4>
+                <ol className="space-y-2 text-sm text-slate-700">
+                  <li className="flex gap-2">
+                    <span className="font-bold text-teal-600 flex-shrink-0">1.</span>
+                    <span><strong>Choose a concept</strong> you want to learn and write it at the top of a blank page.</span>
+                  </li>
+                  <li className="flex gap-2">
+                    <span className="font-bold text-teal-600 flex-shrink-0">2.</span>
+                    <span><strong>Explain it in simple terms</strong> as if teaching a child. Use plain language and avoid jargon.</span>
+                  </li>
+                  <li className="flex gap-2">
+                    <span className="font-bold text-teal-600 flex-shrink-0">3.</span>
+                    <span><strong>Identify gaps</strong> in your explanation. Where did you struggle? These are areas you don't fully understand.</span>
+                  </li>
+                  <li className="flex gap-2">
+                    <span className="font-bold text-teal-600 flex-shrink-0">4.</span>
+                    <span><strong>Review and simplify</strong> your explanation until it's crystal clear and uses only simple words.</span>
+                  </li>
+                </ol>
+              </div>
+              <div className="bg-teal-50 border border-teal-100 rounded-lg p-4">
+                <p className="text-sm text-teal-900">
+                  <strong>Pro Tip:</strong> If you can't explain something simply, you don't understand it well enough. This technique forces you to confront gaps in your knowledge.
+                </p>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Spaced Repetition */}
+          <Card className="border-slate-200 shadow-sm">
+            <CardHeader>
+              <div className="flex items-start gap-3">
+                <div className="w-10 h-10 rounded-lg bg-blue-50 flex items-center justify-center flex-shrink-0">
+                  <Clock className="h-5 w-5 text-blue-600" />
+                </div>
+                <div>
+                  <CardTitle className="text-xl font-bold text-slate-900">Spaced Repetition</CardTitle>
+                  <p className="text-sm text-slate-500 mt-1">Remember More, Study Less</p>
+                </div>
+              </div>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <p className="text-slate-700 leading-relaxed">
+                Spaced repetition is a learning technique that incorporates increasing intervals of time between subsequent reviews of previously learned material. It's scientifically proven to improve long-term retention by up to 200%.
+              </p>
+              <div className="space-y-3">
+                <h4 className="font-semibold text-slate-900">The Optimal Schedule:</h4>
+                <div className="space-y-2 text-sm">
+                  <div className="flex items-center gap-3 p-2 bg-slate-50 rounded">
+                    <span className="font-bold text-blue-600 w-24">Day 1:</span>
+                    <span className="text-slate-700">Learn new material</span>
+                  </div>
+                  <div className="flex items-center gap-3 p-2 bg-slate-50 rounded">
+                    <span className="font-bold text-blue-600 w-24">Day 2:</span>
+                    <span className="text-slate-700">First review (24 hours later)</span>
+                  </div>
+                  <div className="flex items-center gap-3 p-2 bg-slate-50 rounded">
+                    <span className="font-bold text-blue-600 w-24">Day 5:</span>
+                    <span className="text-slate-700">Second review (3 days later)</span>
+                  </div>
+                  <div className="flex items-center gap-3 p-2 bg-slate-50 rounded">
+                    <span className="font-bold text-blue-600 w-24">Day 12:</span>
+                    <span className="text-slate-700">Third review (1 week later)</span>
+                  </div>
+                  <div className="flex items-center gap-3 p-2 bg-slate-50 rounded">
+                    <span className="font-bold text-blue-600 w-24">Day 30:</span>
+                    <span className="text-slate-700">Final review (1 month later)</span>
+                  </div>
+                </div>
+              </div>
+              <div className="bg-blue-50 border border-blue-100 rounded-lg p-4">
+                <p className="text-sm text-blue-900">
+                  <strong>Why It Works:</strong> Your brain strengthens neural pathways each time you recall information. Spacing out reviews forces active recall, making memories more durable.
+                </p>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Active Recall */}
+          <Card className="border-slate-200 shadow-sm">
+            <CardHeader>
+              <div className="flex items-start gap-3">
+                <div className="w-10 h-10 rounded-lg bg-purple-50 flex items-center justify-center flex-shrink-0">
+                  <GraduationCap className="h-5 w-5 text-purple-600" />
+                </div>
+                <div>
+                  <CardTitle className="text-xl font-bold text-slate-900">Active Recall</CardTitle>
+                  <p className="text-sm text-slate-500 mt-1">Test Yourself to Learn Better</p>
+                </div>
+              </div>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <p className="text-slate-700 leading-relaxed">
+                Active recall is the practice of actively stimulating memory during the learning process. Instead of passively re-reading notes, you force your brain to retrieve information, which dramatically strengthens memory formation.
+              </p>
+              <div className="space-y-3">
+                <h4 className="font-semibold text-slate-900">Effective Methods:</h4>
+                <ul className="space-y-2 text-sm text-slate-700">
+                  <li className="flex gap-2">
+                    <Check className="h-4 w-4 text-purple-600 flex-shrink-0 mt-0.5" />
+                    <span><strong>Flashcards:</strong> Write questions on one side, answers on the other. Quiz yourself regularly.</span>
+                  </li>
+                  <li className="flex gap-2">
+                    <Check className="h-4 w-4 text-purple-600 flex-shrink-0 mt-0.5" />
+                    <span><strong>Practice Tests:</strong> Take practice exams under timed conditions to simulate the real thing.</span>
+                  </li>
+                  <li className="flex gap-2">
+                    <Check className="h-4 w-4 text-purple-600 flex-shrink-0 mt-0.5" />
+                    <span><strong>Blank Page Method:</strong> Close your notes and write everything you remember from scratch.</span>
+                  </li>
+                  <li className="flex gap-2">
+                    <Check className="h-4 w-4 text-purple-600 flex-shrink-0 mt-0.5" />
+                    <span><strong>Teach Someone:</strong> Explain concepts to a friend or study partner without looking at notes.</span>
+                  </li>
+                </ul>
+              </div>
+              <div className="bg-purple-50 border border-purple-100 rounded-lg p-4">
+                <p className="text-sm text-purple-900">
+                  <strong>Research Shows:</strong> Students who use active recall score 50% higher on tests compared to those who just re-read material.
+                </p>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Pomodoro Technique */}
+          <Card className="border-slate-200 shadow-sm">
+            <CardHeader>
+              <div className="flex items-start gap-3">
+                <div className="w-10 h-10 rounded-lg bg-amber-50 flex items-center justify-center flex-shrink-0">
+                  <Clock className="h-5 w-5 text-amber-600" />
+                </div>
+                <div>
+                  <CardTitle className="text-xl font-bold text-slate-900">Pomodoro Technique</CardTitle>
+                  <p className="text-sm text-slate-500 mt-1">Beat Procrastination with Time Blocks</p>
+                </div>
+              </div>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <p className="text-slate-700 leading-relaxed">
+                The Pomodoro Technique is a time management method that uses a timer to break work into focused intervals (traditionally 25 minutes) separated by short breaks. It helps maintain concentration and prevents burnout.
+              </p>
+              <div className="space-y-3">
+                <h4 className="font-semibold text-slate-900">The Classic Pomodoro Cycle:</h4>
+                <div className="space-y-2">
+                  <div className="flex items-start gap-3 p-3 bg-amber-50 rounded-lg border border-amber-100">
+                    <span className="font-bold text-amber-600 text-2xl">🍅</span>
+                    <div className="flex-1">
+                      <p className="font-semibold text-slate-900">25-Minute Focus Session</p>
+                      <p className="text-sm text-slate-600">Work on ONE task with complete focus. No distractions allowed.</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3 p-3 bg-green-50 rounded-lg border border-green-100">
+                    <span className="font-bold text-green-600 text-2xl">☕</span>
+                    <div className="flex-1">
+                      <p className="font-semibold text-slate-900">5-Minute Break</p>
+                      <p className="text-sm text-slate-600">Step away from your desk. Stretch, hydrate, or take a quick walk.</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3 p-3 bg-blue-50 rounded-lg border border-blue-100">
+                    <span className="font-bold text-blue-600 text-2xl">🎯</span>
+                    <div className="flex-1">
+                      <p className="font-semibold text-slate-900">After 4 Pomodoros</p>
+                      <p className="text-sm text-slate-600">Take a longer 15-30 minute break to fully recharge.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="bg-amber-50 border border-amber-100 rounded-lg p-4">
+                <p className="text-sm text-amber-900">
+                  <strong>Pro Tip:</strong> Use our Focus Timer tool above to try it right now! The technique works because it makes large tasks feel manageable and provides regular rewards (breaks).
+                </p>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Subject-Specific Study Tips */}
+        <div className="bg-gradient-to-br from-slate-50 to-slate-100 rounded-2xl p-8 border border-slate-200">
+          <h3 className="text-2xl font-bold text-slate-900 mb-6">Subject-Specific Study Strategies</h3>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {/* Math */}
+            <div className="bg-white rounded-lg p-6 border border-slate-200">
+              <div className="flex items-center gap-2 mb-3">
+                <Calculator className="h-5 w-5 text-blue-600" />
+                <h4 className="font-bold text-slate-900">Mathematics</h4>
+              </div>
+              <ul className="space-y-2 text-sm text-slate-700">
+                <li className="flex gap-2">
+                  <span className="text-blue-600">•</span>
+                  <span>Practice problems daily, not just before exams</span>
+                </li>
+                <li className="flex gap-2">
+                  <span className="text-blue-600">•</span>
+                  <span>Write out every step, even if it seems obvious</span>
+                </li>
+                <li className="flex gap-2">
+                  <span className="text-blue-600">•</span>
+                  <span>Understand WHY formulas work, don't just memorize</span>
+                </li>
+                <li className="flex gap-2">
+                  <span className="text-blue-600">•</span>
+                  <span>Teach concepts to others to solidify understanding</span>
+                </li>
+              </ul>
+            </div>
+
+            {/* Science */}
+            <div className="bg-white rounded-lg p-6 border border-slate-200">
+              <div className="flex items-center gap-2 mb-3">
+                <Microscope className="h-5 w-5 text-emerald-600" />
+                <h4 className="font-bold text-slate-900">Sciences</h4>
+              </div>
+              <ul className="space-y-2 text-sm text-slate-700">
+                <li className="flex gap-2">
+                  <span className="text-emerald-600">•</span>
+                  <span>Create visual diagrams and flowcharts</span>
+                </li>
+                <li className="flex gap-2">
+                  <span className="text-emerald-600">•</span>
+                  <span>Connect concepts to real-world examples</span>
+                </li>
+                <li className="flex gap-2">
+                  <span className="text-emerald-600">•</span>
+                  <span>Use mnemonics for complex processes</span>
+                </li>
+                <li className="flex gap-2">
+                  <span className="text-emerald-600">•</span>
+                  <span>Watch demonstrations and simulations</span>
+                </li>
+              </ul>
+            </div>
+
+            {/* Languages */}
+            <div className="bg-white rounded-lg p-6 border border-slate-200">
+              <div className="flex items-center gap-2 mb-3">
+                <Globe className="h-5 w-5 text-purple-600" />
+                <h4 className="font-bold text-slate-900">Languages</h4>
+              </div>
+              <ul className="space-y-2 text-sm text-slate-700">
+                <li className="flex gap-2">
+                  <span className="text-purple-600">•</span>
+                  <span>Immerse yourself: watch shows, listen to music</span>
+                </li>
+                <li className="flex gap-2">
+                  <span className="text-purple-600">•</span>
+                  <span>Practice speaking out loud, even alone</span>
+                </li>
+                <li className="flex gap-2">
+                  <span className="text-purple-600">•</span>
+                  <span>Use spaced repetition for vocabulary</span>
+                </li>
+                <li className="flex gap-2">
+                  <span className="text-purple-600">•</span>
+                  <span>Focus on common phrases before grammar rules</span>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -279,11 +571,11 @@ const AcademicHome = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          
+
           {/* STEM CARD */}
-          <ResourceCard 
-            icon={Atom} 
-            title="Science & Math" 
+          <ResourceCard
+            icon={Atom}
+            title="Science & Math"
             color="text-blue-600"
             bg="bg-blue-50"
             links={[
@@ -296,9 +588,9 @@ const AcademicHome = () => {
           />
 
           {/* CODING CARD */}
-          <ResourceCard 
-            icon={Code} 
-            title="Computer Science" 
+          <ResourceCard
+            icon={Code}
+            title="Computer Science"
             color="text-emerald-600"
             bg="bg-emerald-50"
             links={[
@@ -311,9 +603,9 @@ const AcademicHome = () => {
           />
 
           {/* HUMANITIES CARD */}
-          <ResourceCard 
-            icon={Globe} 
-            title="Humanities & Lang" 
+          <ResourceCard
+            icon={Globe}
+            title="Humanities & Lang"
             color="text-amber-600"
             bg="bg-amber-50"
             links={[
@@ -326,9 +618,9 @@ const AcademicHome = () => {
           />
 
           {/* RESEARCH CARD */}
-          <ResourceCard 
-            icon={Database} 
-            title="Academic Research" 
+          <ResourceCard
+            icon={Database}
+            title="Academic Research"
             color="text-purple-600"
             bg="bg-purple-50"
             links={[
@@ -341,9 +633,9 @@ const AcademicHome = () => {
           />
 
           {/* PRODUCTIVITY CARD */}
-          <ResourceCard 
-            icon={PenTool} 
-            title="Student Utilities" 
+          <ResourceCard
+            icon={PenTool}
+            title="Student Utilities"
             color="text-slate-600"
             bg="bg-slate-100"
             links={[
@@ -356,9 +648,9 @@ const AcademicHome = () => {
           />
 
           {/* DOCUMENTARIES CARD */}
-          <ResourceCard 
-            icon={PlayCircle} 
-            title="Visual Learning" 
+          <ResourceCard
+            icon={PlayCircle}
+            title="Visual Learning"
             color="text-rose-600"
             bg="bg-rose-50"
             links={[
@@ -380,7 +672,7 @@ const AcademicHome = () => {
             "Education is not the learning of facts, but the training of the mind to think."
           </blockquote>
           <cite className="block text-teal-300 font-semibold not-italic">— Albert Einstein</cite>
-          
+
           <div className="pt-8 grid grid-cols-2 md:grid-cols-4 gap-8 text-center border-t border-teal-800 mt-8">
             <div>
               <div className="text-3xl font-bold text-white">45+</div>
@@ -420,9 +712,9 @@ const ResourceCard = ({ icon: Icon, title, links, color, bg }: any) => (
       <ul className="space-y-2">
         {links.map((link: any, i: number) => (
           <li key={i}>
-            <a 
-              href={link.url} 
-              target="_blank" 
+            <a
+              href={link.url}
+              target="_blank"
               rel="noreferrer noopener"
               className="group flex items-center justify-between text-sm text-slate-500 hover:text-teal-700 hover:bg-teal-50 p-2 rounded-md transition-colors cursor-pointer"
             >
@@ -439,7 +731,7 @@ const ResourceCard = ({ icon: Icon, title, links, color, bg }: any) => (
 // --- MAIN WRAPPER ---
 const Index = () => {
   const { isAuthenticated } = useAuth();
-  
+
   if (isAuthenticated) {
     return <GamerHome />;
   }

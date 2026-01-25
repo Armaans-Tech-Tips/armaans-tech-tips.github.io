@@ -6,7 +6,7 @@ import { SEO } from "@/components/SEO";
 import { Footer } from "@/components/Footer";
 import { TopBannerAd, BottomAd, InContentAd } from "@/components/GoogleAd";
 import { useAuth } from "@/contexts/AuthContext";
-import { NutriSnapPromo } from "@/components/NutriSnapPromo";
+
 
 const EducationPage = () => {
   const { isAuthenticated } = useAuth();
@@ -114,7 +114,7 @@ const EducationPage = () => {
 
   return (
     <>
-      <SEO 
+      <SEO
         title="Education Resources & Study Tools | Tech Tips"
         description="Free educational resources including grade calculator, programming tutorials, math resources, study techniques, and learning guides for students."
         keywords="education resources, grade calculator, study tools, programming tutorials, math resources, study techniques, learning guides, student resources, online learning"
@@ -123,8 +123,7 @@ const EducationPage = () => {
         <ShareBanner />
         <TopBannerAd />
 
-        {/* NutriSnap Premium Promo */}
-        <NutriSnapPromo />
+
 
         {/* Learning Platforms */}
         <ContentSection

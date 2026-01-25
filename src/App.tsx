@@ -49,13 +49,14 @@ import SharePage from "./pages/SharePage";
 import SafeModePage from "./pages/SafeModePage";
 import SEOSetupPage from "./pages/SEOSetupPage";
 import { ProtectedRoute } from "./components/ProtectedRoute";
+import { ParticleBackground } from "@/components/ParticleBackground";
 
 const queryClient = new QueryClient();
 
 const AppContent = () => {
   const { isAuthenticated, logout } = useAuth();
   const location = useLocation();
-  
+
   // Initialize reward effects (themes) at app level
   useRewardEffects();
 
@@ -110,7 +111,7 @@ const AppContent = () => {
           <Route path="/safe" element={<SafeModePage />} />
           <Route path="/games/:id" element={<ProtectedRoute><GameDetailPage /></ProtectedRoute>} />
           <Route path="/utilities/:id" element={<ProtectedRoute><UtilityDetailPage /></ProtectedRoute>} />
-          
+
           {/* Routes WITH Layout (navbar included) */}
           <Route element={<Layout />}>
             <Route index element={<Index />} />
@@ -149,6 +150,7 @@ const App = () => {
                 <CoachMarks />
                 <SeasonalTheme />
                 <SeasonalEffects />
+                <ParticleBackground />
                 <AppContent />
               </UserPrefsProvider>
             </ProgressionProvider>

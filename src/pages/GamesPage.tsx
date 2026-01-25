@@ -10,14 +10,14 @@ import fallback from "@/assets/thumbnails/_fallback.png";
 const GamesPage = () => {
   const [searchParams] = useSearchParams();
   const initialCategory = searchParams.get("category") || "all";
-  
+
   const [searchQuery, setSearchQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState(initialCategory);
 
   // Filter Logic - map categories to tags
   const filteredGames = games.filter((game) => {
     const matchesSearch = game.title.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesCategory = activeCategory === "all" || 
+    const matchesCategory = activeCategory === "all" ||
       (activeCategory === "action" && game.tags.includes("action")) ||
       (activeCategory === "racing" && game.tags.includes("racing")) ||
       (activeCategory === "sports" && game.tags.includes("sports")) ||
@@ -38,7 +38,7 @@ const GamesPage = () => {
   return (
     <div className="min-h-screen bg-[#121217] text-slate-100 font-sans">
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        
+
         {/* HEADER & SEARCH */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12">
           <div>
@@ -47,11 +47,11 @@ const GamesPage = () => {
             </h1>
             <p className="text-slate-400">Browse {games.length} unblocked games</p>
           </div>
-          
+
           <div className="relative w-full md:w-96">
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500" size={20} />
-            <Input 
-              placeholder="Search games..." 
+            <Input
+              placeholder="Search games..."
               className="pl-12 bg-[#1E1E24] border-slate-800 text-white h-12 rounded-xl focus:ring-orange-500"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
@@ -65,11 +65,10 @@ const GamesPage = () => {
             <button
               key={cat.id}
               onClick={() => setActiveCategory(cat.id)}
-              className={`flex items-center gap-2 px-5 py-2.5 rounded-full whitespace-nowrap transition-all font-medium border ${
-                activeCategory === cat.id
+              className={`flex items-center gap-2 px-5 py-2.5 rounded-full whitespace-nowrap transition-all font-medium border ${activeCategory === cat.id
                   ? "bg-orange-600 border-orange-500 text-white shadow-lg shadow-orange-900/50"
                   : "bg-[#1E1E24] border-slate-800 text-slate-400 hover:bg-slate-800 hover:text-white"
-              }`}
+                }`}
             >
               <cat.icon size={16} />
               {cat.label}
@@ -88,13 +87,17 @@ const GamesPage = () => {
                 transition={{ delay: idx * 0.05 }}
               >
                 <Link
-                  to={`/games/${game.id}`} // Uses the dynamic ID route
-                  className="group block bg-[#1E1E24] border border-slate-800 rounded-xl overflow-hidden hover:border-orange-500 hover:shadow-[0_0_20px_rgba(249,115,22,0.3)] transition-all duration-300 hover:-translate-y-2"
+                  to={`/games/${game.id}`}
+                  className="group block bg-[#1E1E24] border border-slate-800 rounded-xl overflow-hidden hover:border-orange-500 hover:shadow-[0_0_30px_rgba(249,115,22,0.35),0_10px_40px_rgba(0,0,0,0.4)] transition-all duration-300 hover:-translate-y-2 hover:scale-[1.02]"
                 >
                   <div className="aspect-square relative overflow-hidden">
-                    <img 
-                      src={game.thumbnail || fallback} 
-                      alt={game.title}
+                    <img
+                      src={game.thumbnail || fallback}
+                      alt={`${game.title} - ${game.tags.join(', ')} game`}
+                      loading="lazy"
+                      decoding="async"
+                      width="300"
+                      height="300"
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                     />
                     <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">

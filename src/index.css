@@ -8,65 +8,81 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Christmas Theme - Default for December - Enchanted Garden Party */
-    --background: 120 30% 97%;
-    --foreground: 150 40% 15%;
+    /* Calm Cozy Gaming Palette - Soft & Soothing */
+    --background: 220 25% 10%;
+    /* Soft dark blue-grey */
+    --foreground: 0 0% 95%;
+    /* Soft white */
 
-    --card: 40 40% 97%;
-    --card-foreground: 150 40% 15%;
+    --card: 220 20% 14%;
+    /* Gentle dark blue */
+    --card-foreground: 0 0% 95%;
 
-    --popover: 40 40% 97%;
-    --popover-foreground: 150 40% 15%;
+    --popover: 220 20% 14%;
+    --popover-foreground: 0 0% 95%;
 
-    --primary: 352 95% 40%;
-    --primary-foreground: 40 40% 97%;
+    --primary: 240 60% 65%;
+    /* Soft periwinkle blue */
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 145 45% 35%;
-    --secondary-foreground: 40 40% 97%;
+    --secondary: 280 40% 60%;
+    /* Gentle lavender */
+    --secondary-foreground: 0 0% 100%;
 
-    --muted: 80 30% 90%;
-    --muted-foreground: 150 30% 35%;
+    --muted: 220 15% 20%;
+    --muted-foreground: 0 0% 65%;
 
-    --accent: 80 55% 55%;
-    --accent-foreground: 150 40% 15%;
+    --accent: 200 50% 55%;
+    /* Calm cyan */
+    --accent-foreground: 0 0% 100%;
 
-    --destructive: 352 85% 45%;
-    --destructive-foreground: 40 40% 97%;
+    --destructive: 0 70% 60%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 120 20% 85%;
-    --input: 120 20% 85%;
-    --ring: 352 95% 40%;
+    --border: 220 15% 20%;
+    --input: 220 15% 20%;
+    --ring: 240 60% 65%;
 
-    --radius: 0.75rem;
+    --radius: 1rem;
 
-    /* Christmas Colors */
-    --christmas-red: 352 95% 40%;
-    --christmas-darkRed: 352 70% 25%;
-    --christmas-green: 145 45% 35%;
-    --christmas-darkGreen: 150 50% 20%;
-    --christmas-cream: 40 40% 97%;
-    --christmas-gold: 45 85% 50%;
+    /* Calm Gaming Colors */
+    --gaming-blue: 240 60% 65%;
+    /* Soft periwinkle */
+    --gaming-lavender: 280 40% 60%;
+    /* Gentle lavender */
+    --gaming-cyan: 200 50% 55%;
+    /* Calm cyan */
+    --gaming-peach: 20 70% 70%;
+    /* Warm peach */
+    --gaming-mint: 160 40% 60%;
+    /* Soft mint */
 
-    /* Gamer Mode Colors - Christmas Winter Tones */
-    --gamer-bg: 150 35% 12%;
-    --gamer-text: 40 40% 95%;
-    --gamer-accent: 352 95% 50%;
-    --gamer-card: 150 30% 18%;
-    --gamer-border: 145 40% 35%;
-    --gamer-muted: 120 20% 70%;
+    /* Background Layers */
+    --bg-primary: 220 25% 10%;
+    --bg-secondary: 220 20% 14%;
+    --bg-tertiary: 230 20% 16%;
 
-    --sidebar-background: 40 40% 98%;
-    --sidebar-foreground: 150 30% 26%;
-    --sidebar-primary: 150 40% 10%;
-    --sidebar-primary-foreground: 40 40% 98%;
-    --sidebar-accent: 80 30% 95%;
-    --sidebar-accent-foreground: 150 40% 10%;
-    --sidebar-border: 120 15% 91%;
-    --sidebar-ring: 352 90% 50%;
+    /* Gamer Mode Colors - Calm & Cozy */
+    --gamer-bg: 220 25% 12%;
+    --gamer-text: 0 0% 95%;
+    --gamer-accent: 240 60% 65%;
+    --gamer-card: 220 20% 16%;
+    --gamer-border: 240 30% 35%;
+    --gamer-muted: 0 0% 60%;
+
+    --sidebar-background: 220 25% 12%;
+    --sidebar-foreground: 0 0% 92%;
+    --sidebar-primary: 240 60% 65%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 220 20% 16%;
+    --sidebar-accent-foreground: 0 0% 92%;
+    --sidebar-border: 220 15% 20%;
+    --sidebar-ring: 240 60% 65%;
 
     /* Animations */
-    --transition-fast: 120ms cubic-bezier(0.4, 0, 0.2, 1);
-    --transition-normal: 180ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-normal: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-slow: 400ms cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   /* Christmas Theme - Dec 1 - Jan 6 */
@@ -212,19 +228,24 @@ All colors MUST be HSL.
 
   /* Animated Background */
   .animated-bg {
-    background: linear-gradient(
-      135deg,
-      hsl(var(--primary) / 0.1),
-      hsl(var(--accent) / 0.1),
-      hsl(var(--primary) / 0.1)
-    );
+    background: linear-gradient(135deg,
+        hsl(var(--primary) / 0.1),
+        hsl(var(--accent) / 0.1),
+        hsl(var(--primary) / 0.1));
     background-size: 400% 400%;
     animation: gradient-shift 15s ease infinite;
   }
 
   @keyframes gradient-shift {
-    0%, 100% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
+
+    0%,
+    100% {
+      background-position: 0% 50%;
+    }
+
+    50% {
+      background-position: 100% 50%;
+    }
   }
 
   /* Custom Cursor */
@@ -235,14 +256,21 @@ All colors MUST be HSL.
   /* Username Glow */
   .username-glow [class*="user"] {
     text-shadow: 0 0 10px hsl(var(--accent)),
-                 0 0 20px hsl(var(--accent) / 0.5),
-                 0 0 30px hsl(var(--accent) / 0.3);
+      0 0 20px hsl(var(--accent) / 0.5),
+      0 0 30px hsl(var(--accent) / 0.3);
     animation: glow-pulse 2s ease-in-out infinite;
   }
 
   @keyframes glow-pulse {
-    0%, 100% { text-shadow: 0 0 10px hsl(var(--accent)); }
-    50% { text-shadow: 0 0 20px hsl(var(--accent)), 0 0 30px hsl(var(--accent) / 0.8); }
+
+    0%,
+    100% {
+      text-shadow: 0 0 10px hsl(var(--accent));
+    }
+
+    50% {
+      text-shadow: 0 0 20px hsl(var(--accent)), 0 0 30px hsl(var(--accent) / 0.8);
+    }
   }
 
   /* Screen Shake on button clicks */
@@ -251,21 +279,36 @@ All colors MUST be HSL.
   }
 
   @keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    25% { transform: translateX(-5px) rotate(-1deg); }
-    75% { transform: translateX(5px) rotate(1deg); }
+
+    0%,
+    100% {
+      transform: translateX(0);
+    }
+
+    25% {
+      transform: translateX(-5px) rotate(-1deg);
+    }
+
+    75% {
+      transform: translateX(5px) rotate(1deg);
+    }
   }
 
   @keyframes float {
-    0%, 100% {
+
+    0%,
+    100% {
       transform: translateY(0) translateX(0) rotate(0deg) scale(1);
     }
+
     25% {
       transform: translateY(-15px) translateX(5px) rotate(1deg) scale(1.01);
     }
+
     50% {
       transform: translateY(-20px) translateX(0) rotate(0deg) scale(1.02);
     }
+
     75% {
       transform: translateY(-15px) translateX(-5px) rotate(-1deg) scale(1.01);
     }
@@ -276,6 +319,7 @@ All colors MUST be HSL.
       transform: translateY(-100px) translateX(0) rotate(0deg);
       opacity: 1;
     }
+
     100% {
       transform: translateY(100vh) translateX(100px) rotate(360deg);
       opacity: 0.7;
@@ -285,11 +329,111 @@ All colors MUST be HSL.
 
 @layer utilities {
   .animate-fall {
-      animation: fall linear infinite;
+    animation: fall linear infinite;
   }
-  
+
   .animate-pulse-subtle {
     animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+}
+
+@layer components {
+
+  /* Enhanced card styles */
+  .card-enhanced {
+    @apply transition-all duration-300 ease-out;
+    @apply hover:shadow-2xl hover:-translate-y-2;
+    @apply hover:shadow-primary/20;
+  }
+
+  /* Skeleton loading animation */
+  .skeleton {
+    @apply animate-pulse bg-gradient-to-r from-gray-700 via-gray-600 to-gray-700;
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+  }
+
+  /* Better focus states for accessibility */
+  .focus-enhanced:focus {
+    @apply outline-none ring-2 ring-primary ring-offset-2 ring-offset-background;
+  }
+
+  /* Glassmorphism Card */
+  .glass-card {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow:
+      0 8px 32px rgba(0, 0, 0, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  }
+
+  /* Premium Glass Card with Glow */
+  .glass-card-premium {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(24px) saturate(200%);
+    border: 1px solid rgba(168, 85, 247, 0.2);
+    box-shadow:
+      0 8px 32px rgba(0, 0, 0, 0.5),
+      0 0 40px rgba(168, 85, 247, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .glass-card-premium:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(168, 85, 247, 0.4);
+    box-shadow:
+      0 12px 48px rgba(0, 0, 0, 0.6),
+      0 0 60px rgba(168, 85, 247, 0.25),
+      inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    transform: translateY(-4px) scale(1.02);
+  }
+
+  /* Gradient Text */
+  .gradient-text {
+    background: linear-gradient(135deg, hsl(280 100% 65%), hsl(320 90% 60%));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Animated Gradient Background */
+  .animated-gradient {
+    background: linear-gradient(135deg, hsl(280 60% 15%) 0%, hsl(250 50% 10%) 50%, hsl(10 40% 12%) 100%);
+    background-size: 400% 400%;
+    animation: gradient-shift 15s ease infinite;
+  }
+
+  /* Glow Effects */
+  .glow-purple {
+    box-shadow: 0 0 20px rgba(168, 85, 247, 0.4);
+  }
+
+  .text-glow-hover:hover {
+    text-shadow: 0 0 20px hsl(280 100% 65%);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes gradient-shift {
+
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
   }
 }
 
@@ -304,5 +448,23 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+    position: relative;
+  }
+
+  /* Ambient noise texture overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200"><filter id="n"><feTurbulence baseFrequency="0.9" numOctaves="3"/></filter><rect width="200" height="200" filter="url(%23n)" opacity="0.05"/></svg>');
+    opacity: 0.4;
+    pointer-events: none;
+    z-index: 1;
+    mix-blend-mode: overlay;
+  }
+
+  /* Improved line height for readability */
+  p {
+    line-height: 1.7;
   }
 }
