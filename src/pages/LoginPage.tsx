@@ -29,7 +29,7 @@ const LoginPage = () => {
     setLoading(true);
 
     const result = await login(email, password);
-    
+
     if (result.success) {
       navigate("/");
     } else {
@@ -39,18 +39,18 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col">
+    <div className="min-h-screen bg-white text-slate-900 flex flex-col">
       {/* Header */}
       <div className="bg-white border-b border-slate-200 px-6 py-4">
         <div className="max-w-6xl mx-auto flex items-center justify-between">
-          <Link 
-            to="/" 
+          <Link
+            to="/"
             className="flex items-center gap-2 text-slate-600 hover:text-slate-900 transition-colors"
           >
             <ArrowLeft className="h-5 w-5" />
             <span>Back to Academic Portal</span>
           </Link>
-          
+
           <div className="flex items-center gap-2">
             <div className="w-2 h-2 rounded-full bg-teal-500 animate-pulse"></div>
             <span className="text-sm text-slate-500">Secure Login</span>
@@ -61,9 +61,9 @@ const LoginPage = () => {
       {/* Main Content */}
       <div className="flex-1 flex items-center justify-center px-6 py-12">
         <div className="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          
+
           {/* Left Side - Academic Content */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             className="space-y-8"
@@ -118,7 +118,7 @@ const LoginPage = () => {
           </motion.div>
 
           {/* Right Side - Login Form */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.1 }}
@@ -144,7 +144,7 @@ const LoginPage = () => {
                       onChange={(e) => setEmail(e.target.value)}
                       required
                       disabled={loading}
-                      className="h-12 border-slate-300 focus:border-teal-500 focus:ring-teal-500"
+                      className="h-12 bg-white text-slate-900 border-slate-300 focus:border-teal-500 focus:ring-teal-500"
                       placeholder="student@school.edu"
                       autoComplete="off"
                       autoCorrect="off"
@@ -152,7 +152,7 @@ const LoginPage = () => {
                       spellCheck="false"
                     />
                   </div>
-                  
+
                   <div className="space-y-3">
                     <Label htmlFor="password" className="text-sm font-semibold text-slate-700">Password</Label>
                     <Input
@@ -162,7 +162,7 @@ const LoginPage = () => {
                       onChange={(e) => setPassword(e.target.value)}
                       required
                       disabled={loading}
-                      className="h-12 border-slate-300 focus:border-teal-500 focus:ring-teal-500"
+                      className="h-12 bg-white text-slate-900 border-slate-300 focus:border-teal-500 focus:ring-teal-500"
                       placeholder="Enter your password"
                       autoComplete="new-password"
                       autoCorrect="off"
@@ -177,8 +177,8 @@ const LoginPage = () => {
                     </Alert>
                   )}
 
-                  <Button 
-                    type="submit" 
+                  <Button
+                    type="submit"
                     className="w-full h-12 bg-teal-700 hover:bg-teal-800 text-white font-semibold shadow-lg transition-all"
                     disabled={loading}
                   >
